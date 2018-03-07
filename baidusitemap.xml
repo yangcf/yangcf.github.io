@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     
+  <url>
+    <loc>http://yangcf.github.io/2018/03/07/RN%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</loc>
+    <lastmod>2018-03-07T00:41:50.285Z</lastmod>
+    <data>
+        <display>
+        <title>RN常用组件基础用法</title>
+        <pubTime>2018-03-07T00:41:50.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://yangcf.github.io/2018/03/06/ReactNative%E5%BC%BA%E7%83%88%E6%8E%A8%E8%8D%90IDE/</loc>
