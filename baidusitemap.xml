@@ -2,6 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     
+  <url>
+    <loc>http://yangcf.github.io/2018/03/06/ReactNative%E5%BC%BA%E7%83%88%E6%8E%A8%E8%8D%90IDE/</loc>
+    <lastmod>2018-03-10T04:44:51.372Z</lastmod>
+    <data>
+        <display>
+        <title>ReactNative强烈推荐IDE</title>
+        <pubTime>2018-03-06T01:25:59.000Z</pubTime>
+        
+        <tag>RN </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://yangcf.github.io/2018/03/07/RN%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%E4%B9%8BSQLite/</loc>
@@ -27,23 +44,6 @@
         <display>
         <title>开发ReactNative项目遇到的问题总结</title>
         <pubTime>2018-03-02T07:48:50.000Z</pubTime>
-        
-        <tag>RN </tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yangcf.github.io/2018/03/06/ReactNative%E5%BC%BA%E7%83%88%E6%8E%A8%E8%8D%90IDE/</loc>
-    <lastmod>2018-03-06T12:43:20.114Z</lastmod>
-    <data>
-        <display>
-        <title>ReactNative强烈推荐IDE</title>
-        <pubTime>2018-03-06T01:25:59.000Z</pubTime>
         
         <tag>RN </tag>
          
