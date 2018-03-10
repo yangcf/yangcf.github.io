@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="时间一直在变">
 <meta property="og:description" content="react-native-sqlite-storage做一款完整的APP，数据存储自然是少不了的。当数据结构比较简单的时候AsyncStorage的键值对存储完全够用，但是面对一些复杂的数据结构我们就需要使用更为完善的持久方案。sqlite作为跨平台存储的优秀分子，哪里都少不了他的身影。react-native-sqlite-storage是目前github上start最多的sqlite组件，也">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-10T04:37:04.546Z">
+<meta property="og:updated_time" content="2018-03-10T08:52:33.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RN常用组件之SQLite">
 <meta name="twitter:description" content="react-native-sqlite-storage做一款完整的APP，数据存储自然是少不了的。当数据结构比较简单的时候AsyncStorage的键值对存储完全够用，但是面对一些复杂的数据结构我们就需要使用更为完善的持久方案。sqlite作为跨平台存储的优秀分子，哪里都少不了他的身影。react-native-sqlite-storage是目前github上start最多的sqlite组件，也">
@@ -352,7 +352,7 @@
       
         <hr>
 <p><font size="5"><strong><a href="https://github.com/andpor/react-native-sqlite-storage" target="_blank" rel="noopener">react-native-sqlite-storage</a></strong></font><br>做一款完整的APP，数据存储自然是少不了的。当数据结构比较简单的时候AsyncStorage的键值对存储完全够用，但是面对一些复杂的数据结构我们就需要使用更为完善的持久方案。sqlite作为跨平台存储的优秀分子，哪里都少不了他的身影。<br><a href="https://github.com/andpor/react-native-sqlite-storage" target="_blank" rel="noopener">react-native-sqlite-storage</a>是目前github上start最多的sqlite组件，也比较好用，下面介绍一下它的配置和基本使用。</p>
-<h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><h3 id="install（for-Android）"><a href="#install（for-Android）" class="headerlink" title="install（for Android）"></a><strong>install</strong>（for Android）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react-native-sqlite-storage</span><br></pre></td></tr></table></figure>
+<h2 id="安装配置（for-Android）"><a href="#安装配置（for-Android）" class="headerlink" title="安装配置（for Android）"></a>安装配置（for Android）</h2><h3 id="install"><a href="#install" class="headerlink" title="install"></a><strong>install</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react-native-sqlite-storage</span><br></pre></td></tr></table></figure>
 <h3 id="link"><a href="#link" class="headerlink" title="link"></a><strong>link</strong></h3><pre><code>// file: android/settings.gradle
 ...
 include &apos;:react-native-sqlite-storage&apos;
@@ -416,6 +416,10 @@ dependencies {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/10/ITEM项目逻辑梳理/" rel="prev" title="ITEM项目逻辑梳理">
+                ITEM项目逻辑梳理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -501,7 +505,7 @@ dependencies {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -514,7 +518,7 @@ dependencies {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -569,7 +573,7 @@ dependencies {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装配置"><span class="nav-number">1.</span> <span class="nav-text">安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#install（for-Android）"><span class="nav-number">1.1.</span> <span class="nav-text">install（for Android）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#link"><span class="nav-number">1.2.</span> <span class="nav-text">link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Register"><span class="nav-number">1.3.</span> <span class="nav-text">Register</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体使用方法"><span class="nav-number">2.</span> <span class="nav-text">具体使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局设置"><span class="nav-number">2.1.</span> <span class="nav-text">全局设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开-创建数据库"><span class="nav-number">2.2.</span> <span class="nav-text">打开/创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表"><span class="nav-number">2.3.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入数据"><span class="nav-number">2.4.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊"><span class="nav-number">2.5.</span> <span class="nav-text">特殊</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码示例"><span class="nav-number">3.</span> <span class="nav-text">完整代码示例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装配置（for-Android）"><span class="nav-number">1.</span> <span class="nav-text">安装配置（for Android）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#install"><span class="nav-number">1.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#link"><span class="nav-number">1.2.</span> <span class="nav-text">link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Register"><span class="nav-number">1.3.</span> <span class="nav-text">Register</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体使用方法"><span class="nav-number">2.</span> <span class="nav-text">具体使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局设置"><span class="nav-number">2.1.</span> <span class="nav-text">全局设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开-创建数据库"><span class="nav-number">2.2.</span> <span class="nav-text">打开/创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表"><span class="nav-number">2.3.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入数据"><span class="nav-number">2.4.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊"><span class="nav-number">2.5.</span> <span class="nav-text">特殊</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码示例"><span class="nav-number">3.</span> <span class="nav-text">完整代码示例</span></a></li></ol></div>
             
 
           </div>
