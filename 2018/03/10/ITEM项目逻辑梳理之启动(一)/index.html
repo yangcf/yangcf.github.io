@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="RN," />
+  <meta name="keywords" content="ITEM项目," />
 
 
 
@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="在RN开发过程中先后使用了好几个常见的IDE：IDEA、WS、Android studio等，最后觉得最好用的还是VScode。强烈推荐！她是一个非常轻量级的编辑器，而且有强大的插件支持，几乎你能想到的功能都可以找到对应的拓展插件，十分便捷，现在推荐一些开发RN必要的插件。 插件列表  Babel ES6/ES7 必要！ 检查ES6/ES7的语法，并且会高亮，很漂亮，必须安装（别告诉我，你还在用">
-<meta name="keywords" content="RN">
+<meta name="description" content="前言登陆控制无疑是我们这个项目启动后遇到的第一个问题，所有的初始化操作都要在登陆时进行，目前需要的初始化操作只有数据下载这一项，如果后期要添加初始化操作，我建议还是和数据下载放在同一操作层。 逻辑目前的登陆逻辑还是比较简单，后期肯定还会进行修改，本文将会持续跟进。具体如下图所示(如果加载缓慢请刷新页面)：   重要的一点已经在图中标识，从“对比数据版本”开始，两种情况（首次和非首次登陆）一定要复">
+<meta name="keywords" content="ITEM项目">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ReactNative强烈推荐IDE">
-<meta property="og:url" content="http://yangcf.github.io/2018/03/06/ReactNative强烈推荐IDE/index.html">
+<meta property="og:title" content="ITEM项目逻辑梳理之启动(一)">
+<meta property="og:url" content="http://yangcf.github.io/2018/03/10/ITEM项目逻辑梳理之启动(一)/index.html">
 <meta property="og:site_name" content="时间一直在变">
-<meta property="og:description" content="在RN开发过程中先后使用了好几个常见的IDE：IDEA、WS、Android studio等，最后觉得最好用的还是VScode。强烈推荐！她是一个非常轻量级的编辑器，而且有强大的插件支持，几乎你能想到的功能都可以找到对应的拓展插件，十分便捷，现在推荐一些开发RN必要的插件。 插件列表  Babel ES6/ES7 必要！ 检查ES6/ES7的语法，并且会高亮，很漂亮，必须安装（别告诉我，你还在用">
+<meta property="og:description" content="前言登陆控制无疑是我们这个项目启动后遇到的第一个问题，所有的初始化操作都要在登陆时进行，目前需要的初始化操作只有数据下载这一项，如果后期要添加初始化操作，我建议还是和数据下载放在同一操作层。 逻辑目前的登陆逻辑还是比较简单，后期肯定还会进行修改，本文将会持续跟进。具体如下图所示(如果加载缓慢请刷新页面)：   重要的一点已经在图中标识，从“对比数据版本”开始，两种情况（首次和非首次登陆）一定要复">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-10T08:57:10.036Z">
+<meta property="og:updated_time" content="2018-03-10T09:25:11.363Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ReactNative强烈推荐IDE">
-<meta name="twitter:description" content="在RN开发过程中先后使用了好几个常见的IDE：IDEA、WS、Android studio等，最后觉得最好用的还是VScode。强烈推荐！她是一个非常轻量级的编辑器，而且有强大的插件支持，几乎你能想到的功能都可以找到对应的拓展插件，十分便捷，现在推荐一些开发RN必要的插件。 插件列表  Babel ES6/ES7 必要！ 检查ES6/ES7的语法，并且会高亮，很漂亮，必须安装（别告诉我，你还在用">
+<meta name="twitter:title" content="ITEM项目逻辑梳理之启动(一)">
+<meta name="twitter:description" content="前言登陆控制无疑是我们这个项目启动后遇到的第一个问题，所有的初始化操作都要在登陆时进行，目前需要的初始化操作只有数据下载这一项，如果后期要添加初始化操作，我建议还是和数据下载放在同一操作层。 逻辑目前的登陆逻辑还是比较简单，后期肯定还会进行修改，本文将会持续跟进。具体如下图所示(如果加载缓慢请刷新页面)：   重要的一点已经在图中标识，从“对比数据版本”开始，两种情况（首次和非首次登陆）一定要复">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yangcf.github.io/2018/03/06/ReactNative强烈推荐IDE/"/>
+  <link rel="canonical" href="http://yangcf.github.io/2018/03/10/ITEM项目逻辑梳理之启动(一)/"/>
 
 
 
 
 
-  <title>ReactNative强烈推荐IDE | 时间一直在变</title>
+  <title>ITEM项目逻辑梳理之启动(一) | 时间一直在变</title>
   
 
 
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yangcf.github.io/2018/03/06/ReactNative强烈推荐IDE/">
+    <link itemprop="mainEntityOfPage" href="http://yangcf.github.io/2018/03/10/ITEM项目逻辑梳理之启动(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="饭饭君~">
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ReactNative强烈推荐IDE</h1>
+          <h1 class="post-title" itemprop="name headline">ITEM项目逻辑梳理之启动(一)</h1>
         
 
         <div class="post-meta">
@@ -312,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T09:25:59+08:00">
-                2018-03-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T13:33:42+08:00">
+                2018-03-10
               </time>
             
 
@@ -351,20 +351,12 @@
 
       
         <hr>
-<p>在RN开发过程中先后使用了好几个常见的IDE：IDEA、WS、Android studio等，最后觉得最好用的还是VScode。<br><strong>强烈推荐！</strong><br>她是一个非常轻量级的编辑器，而且有强大的插件支持，几乎你能想到的功能都可以找到对应的拓展插件，十分便捷，现在推荐一些开发RN必要的插件。</p>
-<h3 id="插件列表"><a href="#插件列表" class="headerlink" title="插件列表"></a>插件列表</h3><blockquote>
-<ol>
-<li>Babel ES6/ES7 <strong>必要！</strong><br> 检查ES6/ES7的语法，并且会高亮，很漂亮，必须安装（别告诉我，你还在用ES5）。</li>
-<li>React Native Tools  <strong>必要！</strong><br> 这个是微软出的开发工具，非常好用，让你摆脱命令行的束缚。</li>
-<li>ESLint<br> 代码检查工具，可以通过修改.eslintrc文件进行制定，团队开发有必要了解，有利于代码风格的统一。</li>
-<li>Path Intellisense<br> 路径补全插件，可以快速定位import的模块路径，必要！</li>
-<li>Typing auto installer<br> 自动根据package.json安装对应模块，再也不用npm install了</li>
-<li>Beautify<br> 代码美化插件，不是必须，但是真的不错。</li>
-<li>GitLens/tortoise-svn<br>版本控制git和svn，这个不多说了。</li>
-</ol>
-</blockquote>
-<h3 id="智能提示"><a href="#智能提示" class="headerlink" title="智能提示"></a>智能提示</h3><p>啰嗦一句，如果想要代码智能提示只需要在项目根目录执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install typings -g</span><br><span class="line">typings install dt~react --save</span><br><span class="line">typings install dt~react-native --save</span><br></pre></td></tr></table></figure></p>
-<p>OK，现在重启VScode你会发现已经有代码提示了。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>登陆控制无疑是我们这个项目启动后遇到的第一个问题，所有的初始化操作都要在登陆时进行，目前需要的初始化操作只有数据下载这一项，如果后期要添加初始化操作，我建议还是和数据下载放在同一操作层。</p>
+<h2 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h2><p>目前的登陆逻辑还是比较简单，后期肯定还会进行修改，本文将会持续跟进。<br>具体如下图所示(<em>如果加载缓慢请刷新页面</em>)：</p>
+<iframe src="http://www.xmind.net/embed/f2PV" width="900px" height="540px"></iframe>
+
+<p>重要的一点已经在图中标识，从“对比数据版本”开始，两种情况（首次和非首次登陆）一定要复用处理逻辑，尽量简洁代码量。<br>最后下载失败时存的标识可以在进行数据相关操作时进行判断，如果存在下载失败状态，就立即提示用户先要更新本地数据。</p>
+<p>如果有问题欢迎指正。</p>
 
       
     </div>
@@ -382,7 +374,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/RN/" rel="tag"># RN</a>
+            <a href="/tags/ITEM项目/" rel="tag"># ITEM项目</a>
           
         </div>
       
@@ -395,8 +387,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/02/开发ReactNative项目遇到的问题总结/" rel="next" title="开发ReactNative项目遇到的问题总结">
-                <i class="fa fa-chevron-left"></i> 开发ReactNative项目遇到的问题总结
+              <a href="/2018/03/07/RN常用组件之SQLite/" rel="next" title="RN常用组件之SQLite">
+                <i class="fa fa-chevron-left"></i> RN常用组件之SQLite
               </a>
             
           </div>
@@ -404,10 +396,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/07/RN常用组件之SQLite/" rel="prev" title="RN常用组件之SQLite">
-                RN常用组件之SQLite <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -561,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#插件列表"><span class="nav-number">1.</span> <span class="nav-text">插件列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#智能提示"><span class="nav-number">2.</span> <span class="nav-text">智能提示</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑"><span class="nav-number">2.</span> <span class="nav-text">逻辑</span></a></li></ol></div>
             
 
           </div>
