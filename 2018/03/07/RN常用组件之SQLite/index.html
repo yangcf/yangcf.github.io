@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<meta name="baidu-site-verification" content="vvumBnHdBA" />
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="RN常用组件系列," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="react-native-sqlite-storage做一款完整的APP，数据存储自然是少不了的。当数据结构比较简单的时候AsyncStorage的键值对存储完全够用，但是面对一些复杂的数据结构我们就需要使用更为完善的持久方案。sqlite作为跨平台存储的优秀分子，哪里都少不了他的身影。react-native-sqlite-storage是目前github上start最多的sqlite组件，也">
+<meta name="keywords" content="RN常用组件系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RN常用组件之SQLite">
+<meta property="og:url" content="http://yangcf.github.io/2018/03/07/RN常用组件之SQLite/index.html">
+<meta property="og:site_name" content="时间一直在变">
+<meta property="og:description" content="react-native-sqlite-storage做一款完整的APP，数据存储自然是少不了的。当数据结构比较简单的时候AsyncStorage的键值对存储完全够用，但是面对一些复杂的数据结构我们就需要使用更为完善的持久方案。sqlite作为跨平台存储的优秀分子，哪里都少不了他的身影。react-native-sqlite-storage是目前github上start最多的sqlite组件，也">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-10T11:25:58.437Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RN常用组件之SQLite">
+<meta name="twitter:description" content="react-native-sqlite-storage做一款完整的APP，数据存储自然是少不了的。当数据结构比较简单的时候AsyncStorage的键值对存储完全够用，但是面对一些复杂的数据结构我们就需要使用更为完善的持久方案。sqlite作为跨平台存储的优秀分子，哪里都少不了他的身影。react-native-sqlite-storage是目前github上start最多的sqlite组件，也">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yangcf.github.io/2018/03/07/RN常用组件之SQLite/"/>
+
+
+
+
+
+  <title>RN常用组件之SQLite | 时间一直在变</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1f3f3f5f2f36c7671252ee9589eae1fc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+
+		
+	
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">时间一直在变</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">努力追寻，不忘初心</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="http://www.redcross.org.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+	<!--<div id="container" class="container" >
+	<div id="output" class="container" style='float:left;width:10%;height:100%;z-index:-999;'></div>
+	<div id="vignette" class="overlay vignette"></div>
+	<div id="noise" class="overlay noise"></div>
+    <div id="ui" class="wrapper">-->
+		
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap" >
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yangcf.github.io/2018/03/07/RN常用组件之SQLite/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="饭饭君~">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="时间一直在变">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RN常用组件之SQLite</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-07T08:41:50+08:00">
+                2018-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p><font size="5"><strong><a href="https://github.com/andpor/react-native-sqlite-storage" target="_blank" rel="noopener">react-native-sqlite-storage</a></strong></font><br>做一款完整的APP，数据存储自然是少不了的。当数据结构比较简单的时候AsyncStorage的键值对存储完全够用，但是面对一些复杂的数据结构我们就需要使用更为完善的持久方案。sqlite作为跨平台存储的优秀分子，哪里都少不了他的身影。<br><a href="https://github.com/andpor/react-native-sqlite-storage" target="_blank" rel="noopener">react-native-sqlite-storage</a>是目前github上start最多的sqlite组件，也比较好用，下面介绍一下它的配置和基本使用。</p>
+<h2 id="安装配置（for-Android）"><a href="#安装配置（for-Android）" class="headerlink" title="安装配置（for Android）"></a>安装配置（for Android）</h2><h3 id="install"><a href="#install" class="headerlink" title="install"></a><strong>install</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react-native-sqlite-storage</span><br></pre></td></tr></table></figure>
+<h3 id="link"><a href="#link" class="headerlink" title="link"></a><strong>link</strong></h3><pre><code>// file: android/settings.gradle
+...
+include &apos;:react-native-sqlite-storage&apos;
+project(&apos;:react-native-sqlite-storage&apos;).projectDir = new File(rootProject.projectDir,&apos;../node_modules/react-native-sqlite-storage/src/android&apos;)
+
+// file: android/app/build.gradle
+...
+dependencies {
+    ...
+    compile project(&apos;:react-native-sqlite-storage&apos;)
+}
+</code></pre><h3 id="Register"><a href="#Register" class="headerlink" title="Register"></a><strong>Register</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import org.pgsqlite.SQLitePluginPackage;</span><br><span class="line"></span><br><span class="line">public class MainApplication extends Application implements ReactApplication &#123;</span><br><span class="line">  ......</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * A list of packages used by the app. If the app uses additional views</span><br><span class="line">   * or modules besides the default ones, add more packages here.</span><br><span class="line">   */</span><br><span class="line">    @Override</span><br><span class="line">    protected List&lt;ReactPackage&gt; <span class="function"><span class="title">getPackages</span></span>() &#123;</span><br><span class="line">      <span class="built_in">return</span> Arrays.&lt;ReactPackage&gt;asList(</span><br><span class="line">        new SQLitePluginPackage(),   // 在这里添加一行，别忘了import</span><br><span class="line">        new MainReactPackage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>经过上述步骤，组件就可以使用了。</p>
+<h2 id="具体使用方法"><a href="#具体使用方法" class="headerlink" title="具体使用方法"></a>具体使用方法</h2><h3 id="全局设置"><a href="#全局设置" class="headerlink" title="全局设置"></a>全局设置</h3><p>通常要把他设为全局，这样在任何地方都可以操作数据库。设置方法如下：</p>
+<pre><code>//在index.js里添加
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import SQLite from <span class="string">'react-native-sqlite-storage'</span>;</span><br><span class="line">SQLite.DEBUG(<span class="literal">true</span>);</span><br><span class="line">SQLite.enablePromise(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="打开-创建数据库"><a href="#打开-创建数据库" class="headerlink" title="打开/创建数据库"></a>打开/创建数据库</h3><p>首先需要一个数据库。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//打开数据库</span><br><span class="line">//location属性只对iOS有效,android是默认的</span><br><span class="line">SQLite.openDatabase(&#123;name: <span class="string">'my.db'</span>, location: <span class="string">'default'</span>&#125;, successcb, errorcb);</span><br></pre></td></tr></table></figure></p>
+<p>更多参数请移步<a href="https://github.com/andpor/react-native-sqlite-storage" target="_blank" rel="noopener">GitHub</a>查看。</p>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//操作API：transaction(func,[func=&gt;(error)&#123;&#125;],[func=&gt;&#123;&#125;])</span><br><span class="line">db.transaction(<span class="keyword">function</span>(tx) &#123;</span><br><span class="line">    tx.executeSql(<span class="string">'CREATE TABLE IF NOT EXISTS DemoTable (name, score)'</span>);</span><br><span class="line">  &#125;, <span class="keyword">function</span>(error) &#123;//失败回调</span><br><span class="line">    console.log(<span class="string">'Transaction ERROR: '</span> + error.message);</span><br><span class="line">  &#125;, <span class="function"><span class="title">function</span></span>() &#123;//成功回调</span><br><span class="line">    console.log(<span class="string">'Populated database OK'</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.transaction(<span class="keyword">function</span>(tx) &#123;</span><br><span class="line">    tx.executeSql(<span class="string">'INSERT INTO DemoTable VALUES (?,?)'</span>, [<span class="string">'Alice'</span>, 101]);</span><br><span class="line">  &#125;, <span class="keyword">function</span>(error) &#123;//失败回调</span><br><span class="line">    console.log(<span class="string">'Transaction ERROR: '</span> + error.message);</span><br><span class="line">  &#125;, <span class="function"><span class="title">function</span></span>() &#123;//成功回调</span><br><span class="line">    console.log(<span class="string">'Populated database OK'</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>剩下的改查就不写了，可以看出来，就是在transaction()中调用executeSql()执行sql就行了。</p>
+<h3 id="特殊"><a href="#特殊" class="headerlink" title="特殊"></a>特殊</h3><p>对于包含count()这类函数的语句，其结果处理要直接在executeSql()中标明。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.transaction(<span class="keyword">function</span>(tx) &#123;</span><br><span class="line">    tx.executeSql(<span class="string">'SELECT count(*) AS mycount FROM DemoTable'</span>, [], <span class="keyword">function</span>(tx, rs) &#123;</span><br><span class="line">      console.log(<span class="string">'Record count (expected to be 2): '</span> + rs.rows.item(0).mycount);</span><br><span class="line">    &#125;, <span class="keyword">function</span>(tx, error) &#123;</span><br><span class="line">      console.log(<span class="string">'SELECT error: '</span> + error.message);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="完整代码示例"><a href="#完整代码示例" class="headerlink" title="完整代码示例"></a>完整代码示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 产品类别表dao</span><br><span class="line"> */</span><br><span class="line">import React, &#123; Component &#125; from <span class="string">'react'</span>;</span><br><span class="line">import &#123;</span><br><span class="line">    ToastAndroid,</span><br><span class="line">&#125; from <span class="string">'react-native'</span>;</span><br><span class="line">import SQLiteStorage  from <span class="string">'react-native-sqlite-storage'</span>;</span><br><span class="line">SQLiteStorage .DEBUG(<span class="literal">true</span>);</span><br><span class="line">SQLiteStorage .enablePromise(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">var database_name = <span class="string">"ITEM.db"</span>;//数据库文件</span><br><span class="line">var database_version = <span class="string">"1.0"</span>;//版本号</span><br><span class="line">var database_displayname = <span class="string">"ITEMSQLite"</span>;</span><br><span class="line">var database_size = -1;</span><br><span class="line">var db;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default class TBaseSblbDao extends Component &#123;</span><br><span class="line">    <span class="function"><span class="title">componentWillUnmount</span></span>()&#123;</span><br><span class="line">        <span class="keyword">if</span>(db)&#123;</span><br><span class="line">            this._successCB(<span class="string">'close'</span>);</span><br><span class="line">            db.close();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            console.log(<span class="string">"SQLiteStorage not open"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">open</span></span>()&#123;</span><br><span class="line">        db = SQLiteStorage.openDatabase(</span><br><span class="line">            database_name,</span><br><span class="line">            database_version,</span><br><span class="line">            database_displayname,</span><br><span class="line">            database_size,</span><br><span class="line">            ()=&gt;&#123;</span><br><span class="line">                this._successCB(<span class="string">'open'</span>);</span><br><span class="line">            &#125;,</span><br><span class="line">            (err)=&gt;&#123;</span><br><span class="line">                this._errorCB(<span class="string">'open'</span>,err);</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="built_in">return</span> db;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">createTable</span></span>()&#123;</span><br><span class="line">        <span class="keyword">if</span> (!db) &#123;</span><br><span class="line">            this.open();</span><br><span class="line">        &#125;</span><br><span class="line">        //创建产品类别表</span><br><span class="line">        db.transaction((tx)=&gt; &#123;</span><br><span class="line">            tx.executeSql(<span class="string">'CREATE TABLE IF NOT EXISTS T_BASE_SBLB('</span> +</span><br><span class="line">                <span class="string">'F_ID VARCHAR PRIMARY KEY  AUTOINCREMENT,'</span> +</span><br><span class="line">                <span class="string">'F_BM VARCHAR,'</span>+</span><br><span class="line">                <span class="string">'F_FBM VARCHAR,'</span> +</span><br><span class="line">                <span class="string">'F_MC VARCHAR,'</span> +</span><br><span class="line">                <span class="string">'F_TYPE VARCHAR,'</span> +</span><br><span class="line">                <span class="string">'F_YRJ VARCHAR,'</span> +</span><br><span class="line">                <span class="string">'F_PX VARCHAR)'</span></span><br><span class="line">                , [], ()=&gt; &#123;</span><br><span class="line">                    this._successCB(<span class="string">'executeSql'</span>);</span><br><span class="line">                &#125;, (err)=&gt; &#123;</span><br><span class="line">                    this._errorCB(<span class="string">'executeSql'</span>, err);</span><br><span class="line">                &#125;);</span><br><span class="line">        &#125;, (err)=&gt; &#123;//所有的 transaction都应该有错误的回调方法</span><br><span class="line">            this._errorCB(<span class="string">'transaction'</span>, err);</span><br><span class="line">        &#125;, ()=&gt; &#123;</span><br><span class="line">            this._successCB(<span class="string">'transaction'</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">deleteData</span></span>()&#123;//清空数据</span><br><span class="line">        <span class="keyword">if</span> (!db) &#123;</span><br><span class="line">            this.open();</span><br><span class="line">        &#125;</span><br><span class="line">        db.transaction((tx)=&gt;&#123;</span><br><span class="line">            tx.executeSql(<span class="string">'delete from user'</span>,[],()=&gt;&#123;</span><br><span class="line"></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">dropTable</span></span>()&#123;//删除表</span><br><span class="line">        db.transaction((tx)=&gt;&#123;</span><br><span class="line">            tx.executeSql(<span class="string">'drop table user'</span>,[],()=&gt;&#123;</span><br><span class="line"></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,(err)=&gt;&#123;</span><br><span class="line">            this._errorCB(<span class="string">'transaction'</span>, err);</span><br><span class="line">        &#125;,()=&gt;&#123;</span><br><span class="line">            this._successCB(<span class="string">'transaction'</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    insertUserData(userData)&#123;</span><br><span class="line">        <span class="built_in">let</span> len = userData.length;</span><br><span class="line">        <span class="keyword">if</span> (!db) &#123;</span><br><span class="line">            this.open();</span><br><span class="line">        &#125;</span><br><span class="line">        this.createTable();</span><br><span class="line">        this.deleteData();</span><br><span class="line">        db.transaction((tx)=&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">let</span> i=0; i&lt;len; i++)&#123;</span><br><span class="line">                //这部分是示例,照这个写就行，字段必须和传入的对应。</span><br><span class="line">                // var user = userData[i];</span><br><span class="line">                // <span class="built_in">let</span> name= user.name;</span><br><span class="line">                // <span class="built_in">let</span> age = user.age;</span><br><span class="line">                // <span class="built_in">let</span> sex = user.sex;</span><br><span class="line">                // <span class="built_in">let</span> phone = user.phone;</span><br><span class="line">                // <span class="built_in">let</span> email = user.email;</span><br><span class="line">                // <span class="built_in">let</span> address = user.address;</span><br><span class="line">                // <span class="built_in">let</span> sql = <span class="string">"INSERT INTO user(name,age,sex,phone,email,address)"</span>+</span><br><span class="line">                //     <span class="string">"values(?,?,?,?,?,?)"</span>;</span><br><span class="line">                // tx.executeSql(sql,[name,age,sex,phone,email,address],()=&gt;&#123;</span><br><span class="line"></span><br><span class="line">                //     &#125;,(err)=&gt;&#123;</span><br><span class="line">                //         console.log(err);</span><br><span class="line">                //     &#125;</span><br><span class="line">                // );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,(error)=&gt;&#123;</span><br><span class="line">            this._errorCB(<span class="string">'transaction'</span>, error);</span><br><span class="line">        &#125;,()=&gt;&#123;</span><br><span class="line">            this._successCB(<span class="string">'transaction insert data'</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">close</span></span>()&#123;</span><br><span class="line">        <span class="keyword">if</span>(db)&#123;</span><br><span class="line">            this._successCB(<span class="string">'close'</span>);</span><br><span class="line">            db.close();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            console.log(<span class="string">"SQLiteStorage not open"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        db = null;</span><br><span class="line">    &#125;</span><br><span class="line">    _successCB(name)&#123;</span><br><span class="line">        console.log(<span class="string">"SQLiteStorage "</span>+name+<span class="string">" success"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    _errorCB(name, err)&#123;</span><br><span class="line">        console.log(<span class="string">"SQLiteStorage "</span>+name);</span><br><span class="line">        console.log(err);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">render</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>更多操作待补充……</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RN常用组件系列/" rel="tag"># RN常用组件系列</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/07/RN常用组件之二维码识别/" rel="next" title="RN常用组件之二维码识别">
+                <i class="fa fa-chevron-left"></i> RN常用组件之二维码识别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/10/ITEM项目逻辑梳理之启动(一)/" rel="prev" title="ITEM项目逻辑梳理之启动(一)">
+                ITEM项目逻辑梳理之启动(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDYwMi8xMTE0MA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="饭饭君~" />
+            
+              <p class="site-author-name" itemprop="name">饭饭君~</p>
+              <p class="site-description motion-element" itemprop="description">希望我们都能追寻到美丽</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yangcf" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:mailto:yang.chf@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="836843022" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装配置（for-Android）"><span class="nav-number">1.</span> <span class="nav-text">安装配置（for Android）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#install"><span class="nav-number">1.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#link"><span class="nav-number">1.2.</span> <span class="nav-text">link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Register"><span class="nav-number">1.3.</span> <span class="nav-text">Register</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体使用方法"><span class="nav-number">2.</span> <span class="nav-text">具体使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局设置"><span class="nav-number">2.1.</span> <span class="nav-text">全局设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开-创建数据库"><span class="nav-number">2.2.</span> <span class="nav-text">打开/创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表"><span class="nav-number">2.3.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入数据"><span class="nav-number">2.4.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊"><span class="nav-number">2.5.</span> <span class="nav-text">特殊</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码示例"><span class="nav-number">3.</span> <span class="nav-text">完整代码示例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">饭饭君~</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+	
+  <!--</div>
+  
+</div>-->
+<script type='text/javascript'>
+function addLink() {
+    var body_element = document.getElementsByTagName('body')[0];
+    var selection;
+if(window.getSelection){//DOM,FF,Webkit,Chrome,IE10
+selection = window.getSelection();
+
+
+}else if(document.getSelection){//IE10
+selection= document.getSelection();
+
+
+}else if(document.selection){//IE6+10-
+selection= document.selection.createRange().text;
+
+}else{
+selection= "";
+alert("浏览器兼容问题导致复制失败！");
+}
+    var pagelink = "<br /><br /> 文章来自饭饭君的个人博客,转载请注明来源: <a href='https://yangchaofan.coding.me'>https://yangchaofan.coding.me</a>"; 
+    var copy_text = selection + pagelink;
+    var new_div = document.createElement('div');
+    new_div.style.left='-99999px';
+    new_div.style.position='absolute';
+    body_element.appendChild(new_div );
+    new_div.innerHTML = copy_text ;
+    selection.selectAllChildren(new_div );
+    window.setTimeout(function() {
+        body_element.removeChild(new_div );
+    },0);
+}
+document.body.oncopy = addLink;
+</script>
+  
+	<script type="text/javascript"
+     color="99,184,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+</script>
+ 
+</body>
+</html>
