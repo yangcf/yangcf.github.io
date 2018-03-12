@@ -787,15 +787,15 @@ function addLink() {
     var selection;
 if(window.getSelection){//DOM,FF,Webkit,Chrome,IE10
 selection = window.getSelection();
-alert("文字复制成功！若有文字残缺请用右键复制\n转载请注明出处：https://yangchaofan.coding.me");
+
 
 }else if(document.getSelection){//IE10
 selection= document.getSelection();
-alert("文字复制成功！若有文字残缺请用右键复制\n转载请注明出处：https://yangchaofan.coding.me");
+
 
 }else if(document.selection){//IE6+10-
 selection= document.selection.createRange().text;
-alert("文字复制成功！若有文字残缺请用右键复制\n转载请注明出处：https://yangchaofan.coding.me");
+
 }else{
 selection= "";
 alert("浏览器兼容问题导致复制失败！");
