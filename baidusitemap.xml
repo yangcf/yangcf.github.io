@@ -3,6 +3,23 @@
 
     
   <url>
+    <loc>http://yangcf.github.io/2018/03/07/RN%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%E4%B9%8BSQLite/</loc>
+    <lastmod>2018-03-13T00:51:09.433Z</lastmod>
+    <data>
+        <display>
+        <title>RN常用组件之SQLite</title>
+        <pubTime>2018-03-07T00:41:50.000Z</pubTime>
+        
+        <tag>RN常用组件系列 </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yangcf.github.io/2018/03/10/ITEM%E9%A1%B9%E7%9B%AE%E9%80%BB%E8%BE%91%E6%A2%B3%E7%90%86%E4%B9%8B%E5%90%AF%E5%8A%A8(%E4%B8%80)/</loc>
     <lastmod>2018-03-12T05:34:51.421Z</lastmod>
     <data>
@@ -26,23 +43,6 @@
     <data>
         <display>
         <title>RN常用组件之二维码识别</title>
-        <pubTime>2018-03-07T00:41:50.000Z</pubTime>
-        
-        <tag>RN常用组件系列 </tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yangcf.github.io/2018/03/07/RN%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%E4%B9%8BSQLite/</loc>
-    <lastmod>2018-03-10T11:25:58.437Z</lastmod>
-    <data>
-        <display>
-        <title>RN常用组件之SQLite</title>
         <pubTime>2018-03-07T00:41:50.000Z</pubTime>
         
         <tag>RN常用组件系列 </tag>
