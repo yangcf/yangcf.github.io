@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<meta name="baidu-site-verification" content="vvumBnHdBA" />
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="共享变量可见性实现原理多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="共享变量可见性实现原理">
+<meta property="og:url" content="http://yangcf.github.io/2018/03/30/共享变量可见性实现原理/index.html">
+<meta property="og:site_name" content="时间一直在变">
+<meta property="og:description" content="共享变量可见性实现原理多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-30T08:21:06.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="共享变量可见性实现原理">
+<meta name="twitter:description" content="共享变量可见性实现原理多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yangcf.github.io/2018/03/30/共享变量可见性实现原理/"/>
+
+
+
+
+
+  <title>共享变量可见性实现原理 | 时间一直在变</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1f3f3f5f2f36c7671252ee9589eae1fc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+
+		
+	
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">时间一直在变</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">努力追寻，不忘初心</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="http://www.redcross.org.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+	<!--<div id="container" class="container" >
+	<div id="output" class="container" style='float:left;width:10%;height:100%;z-index:-999;'></div>
+	<div id="vignette" class="overlay vignette"></div>
+	<div id="noise" class="overlay noise"></div>
+    <div id="ui" class="wrapper">-->
+		
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap" >
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yangcf.github.io/2018/03/30/共享变量可见性实现原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="饭饭君~">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="时间一直在变">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">共享变量可见性实现原理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T16:19:44+08:00">
+                2018-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/30/共享变量可见性实现原理/" class="leancloud_visitors" data-flag-title="共享变量可见性实现原理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h1 id="共享变量可见性实现原理"><a href="#共享变量可见性实现原理" class="headerlink" title="共享变量可见性实现原理"></a>共享变量可见性实现原理</h1><pre><code>多个线程共同使用的一个变量叫做共享变量。
+</code></pre><ul>
+<li>线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。</li>
+<li>不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。</li>
+</ul>
+<p>java语言层面实现可见性的方式：</p>
+<ul>
+<li>synchronized</li>
+<li>volatile<h2 id="synchronized实现可见性"><a href="#synchronized实现可见性" class="headerlink" title="synchronized实现可见性"></a>synchronized实现可见性</h2>synchronized最常见的一种理解是可以实现互斥锁，保证操作的原子性（同步）。同时，她也可以实现可见性。<h4 id="JMM关于synchronize的两点规定："><a href="#JMM关于synchronize的两点规定：" class="headerlink" title="JMM关于synchronize的两点规定："></a>JMM关于synchronize的两点规定：</h4></li>
+</ul>
+<ol>
+<li>线程解锁前，必须把共享变量的最新值刷新到主内存中去。</li>
+<li>线程加锁时，将清空工作内存中共享变量的值，从而使用共享变量时需要从主内存中重新读取共享变量的值（<b>注意：加锁和解锁需要是同一把锁</b>）<br>上述操作就可以实现在线程解锁前对共享变量的修改可以在下次加锁时对其他线程可见。<h4 id="线程执行互斥代码的过程"><a href="#线程执行互斥代码的过程" class="headerlink" title="线程执行互斥代码的过程"></a>线程执行互斥代码的过程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">获得互斥锁</span><br><span class="line">清空工作内存</span><br><span class="line">从主内存拷贝变量的最新副本到工作内存</span><br><span class="line">执行代码</span><br><span class="line">将更新后的共享变量的值刷新到主内存</span><br><span class="line">释放互斥锁</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h4><h5 id="重排序"><a href="#重排序" class="headerlink" title="重排序"></a>重排序</h5><p>代码书写的顺序与实际执行的顺序不同，指令重排序是编译器或处理器为了提高程序性能而做的优化。共有三种：</p>
+<ul>
+<li>编译器优化的重排序（编译器优化）</li>
+<li>指令级并行重排序（处理器优化）</li>
+<li>内存系统的重排序（处理器优化）<h5 id="as-if-serial"><a href="#as-if-serial" class="headerlink" title="as-if-serial"></a>as-if-serial</h5>无论如何重排序，程序执行的结果应该与代码顺序执行的结果一致。（java编译器、运行时和处理器都会保证java在单线程下遵循as-if-serial语义）<h4 id="synchronized实现可见性代码"><a href="#synchronized实现可见性代码" class="headerlink" title="synchronized实现可见性代码"></a>synchronized实现可见性代码</h4><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedDemo</span> </span>&#123; </span><br><span class="line">    <span class="comment">//共享变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> ready = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> number = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//写操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">()</span></span>&#123;</span><br><span class="line">     ready = <span class="keyword">true</span>;	<span class="comment">//1.1</span></span><br><span class="line">     number = <span class="number">2</span>;	<span class="comment">//1.2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//读操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(ready)&#123;	<span class="comment">//2.1</span></span><br><span class="line">      result = number*<span class="number">3</span>;	<span class="comment">//2.2</span></span><br><span class="line">     &#125;</span><br><span class="line">     System.out.println(<span class="string">"result的值为："</span> + result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//内部线程类</span></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ReadWriteThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">     <span class="comment">//根据构造方法中传入的flag参数，确定线程执行读操作还是写操作</span></span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">boolean</span> flag;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="title">ReadWriteThread</span><span class="params">(<span class="keyword">boolean</span> flag)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.flag = flag;</span><br><span class="line">     &#125;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">          <span class="comment">//构造方法中传入true，执行写操作</span></span><br><span class="line">          write();</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          <span class="comment">//构造方法中传入false，执行读操作</span></span><br><span class="line">          read();</span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">     SynchronizedDemo synDemo = <span class="keyword">new</span> SynchronizedDemo();</span><br><span class="line">     <span class="comment">//启动线程执行写操作</span></span><br><span class="line">     synDemo .<span class="keyword">new</span> ReadWriteThread(<span class="keyword">true</span>).start();</span><br><span class="line">     <span class="comment">//启动线程执行读操作</span></span><br><span class="line">     synDemo.<span class="keyword">new</span> ReadWriteThread(<span class="keyword">false</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="可见性分析"><a href="#可见性分析" class="headerlink" title="可见性分析"></a>可见性分析</h4><h5 id="不可见的原因："><a href="#不可见的原因：" class="headerlink" title="不可见的原因："></a>不可见的原因：</h5><ol>
+<li>线程的交叉执行  –&gt;原子性</li>
+<li>重排序结合线程交叉执行  –&gt;原子性</li>
+<li>共享变量更新后的值没有在工作内存和主内存间及时更新  –&gt;可见性<h5 id="synchronized解决方案"><a href="#synchronized解决方案" class="headerlink" title="synchronized解决方案"></a>synchronized解决方案</h5>加上<code>synchronized</code> 关键字后保证了执行代码的原子性，避免线程的交叉执行。<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">()</span></span>&#123;</span><br><span class="line">     ready = <span class="keyword">true</span>;	<span class="comment">//1.1</span></span><br><span class="line">     number = <span class="number">2</span>;	<span class="comment">//1.2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//读操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(ready)&#123;	<span class="comment">//2.1</span></span><br><span class="line">      result = number*<span class="number">3</span>;	<span class="comment">//2.2</span></span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="volatile实现可见性"><a href="#volatile实现可见性" class="headerlink" title="volatile实现可见性"></a>volatile实现可见性</h2><p><code>volatile</code>关键字：</p>
+<ul>
+<li>能够保证volatile变量的可见性</li>
+<li>不能保证volatile变量复合操作的原子性<h4 id="volatile如何实现内存可见性"><a href="#volatile如何实现内存可见性" class="headerlink" title="volatile如何实现内存可见性"></a>volatile如何实现内存可见性</h4>深入来说：通过加入内存屏障和禁止重排序优化来实现的。</li>
+<li><p>对volatile变量执行写操作时，会在写操作后加入一条store屏障指令</p>
+<pre><code>store指令会强制刷新输入缓存，将改变的结果刷新到主内存中，同时能够禁止重排序的优化操作。
+</code></pre></li>
+<li>对volatile变量执行读操作时，会在读操作后加入一条load屏障指令<pre><code>load指令会强制刷新工作内存，从主内存中获取变量，同时能够禁止重排序的优化操作。
+</code></pre><h5 id="线程写volatile变量的过程："><a href="#线程写volatile变量的过程：" class="headerlink" title="线程写volatile变量的过程："></a>线程写volatile变量的过程：</h5></li>
+</ul>
+<ol>
+<li>改变线程工作内存中volatile变量副本的值</li>
+<li>将改变后的副本的值从工作内存刷新到主内存<h5 id="线程读volatile变量的过程："><a href="#线程读volatile变量的过程：" class="headerlink" title="线程读volatile变量的过程："></a>线程读volatile变量的过程：</h5></li>
+<li>从主内存中读取volatile变量的最新值到线程的工作内存中</li>
+<li>从工作内存中读取volatile变量的副本</li>
+</ol>
+<h4 id="volatile不能保证原子性"><a href="#volatile不能保证原子性" class="headerlink" title="volatile不能保证原子性"></a>volatile不能保证原子性</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.Lock;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VolatileDemo</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.number;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increase</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">   Thread.sleep(<span class="number">100</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">   <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="keyword">this</span>.number++;  </span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">  <span class="keyword">final</span> VolatileDemo volDemo = <span class="keyword">new</span> VolatileDemo();</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">500</span> ; i++)&#123;</span><br><span class="line">   <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     volDemo.increase();</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;).start();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//如果还有子线程在运行，主线程就让出CPU资源，</span></span><br><span class="line">  <span class="comment">//直到所有的子线程都运行完了，主线程再继续往下执行</span></span><br><span class="line">  <span class="keyword">while</span>(Thread.activeCount() &gt; <span class="number">1</span>)&#123;</span><br><span class="line">   Thread.yield();</span><br><span class="line">  &#125;</span><br><span class="line">  System.out.println(<span class="string">"number : "</span> + volDemo.getNumber());</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行上面的代码会发现输出有时会出现接近500，但是不等于500的情况，这就是因为<code>number++</code>这步操作不属于原子操作造成的。</p>
+<h5 id="解决volatile不能保证自增操作原子性的问题"><a href="#解决volatile不能保证自增操作原子性的问题" class="headerlink" title="解决volatile不能保证自增操作原子性的问题"></a>解决volatile不能保证自增操作原子性的问题</h5><ol>
+<li>使用<code>synchronized</code>关键字</li>
+<li>使用ReentrantLock（java.until.concurrent.locks包下，JDK1.5之后）</li>
+<li>使用AtomicInterger（vava.util.concurrent.atomic包下，JDK1.5之后）<br>关于<code>synchronized</code>的使用，上文已经说过，下面演示一下<code>ReentrantLock</code>的使用：<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">import java.util.concurrent.locks.Lock;</span><br><span class="line">import java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VolatileDemo</span> &#123;</span><br><span class="line"> <span class="keyword">private</span> Lock <span class="keyword">lock</span> = <span class="keyword">new</span> ReentrantLock();<span class="comment">//在这里实例化对象</span></span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.number;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increase</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">   Thread.sleep(<span class="number">100</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">   <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">lock</span>.<span class="keyword">lock</span>();<span class="comment">//加锁</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">   <span class="keyword">this</span>.number++;</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">   <span class="keyword">lock</span>.unlock();<span class="comment">//不如执行结果如何都要进行解锁</span></span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @param args</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">  final VolatileDemo volDemo = <span class="keyword">new</span> VolatileDemo();</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">500</span> ; i++)&#123;</span><br><span class="line">   <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     volDemo.increase();</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;).start();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//如果还有子线程在运行，主线程就让出CPU资源，</span></span><br><span class="line">  <span class="comment">//直到所有的子线程都运行完了，主线程再继续往下执行</span></span><br><span class="line">  <span class="keyword">while</span>(Thread.activeCount() &gt; <span class="number">1</span>)&#123;</span><br><span class="line">   Thread.<span class="keyword">yield</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  System.<span class="keyword">out</span>.println(<span class="string">"number : "</span> + volDemo.getNumber());</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="volatile的适用场景"><a href="#volatile的适用场景" class="headerlink" title="volatile的适用场景"></a>volatile的适用场景</h4><p>在多线程中安全的适用volatile变量，必须同时满足两个条件：</p>
+<ol>
+<li>对面变量的写入操作不依赖其当前值</li>
+</ol>
+<ul>
+<li>不满足：number++、count=count*5等</li>
+<li>满足：boolean变量、记录温度变化的变量等</li>
+</ul>
+<ol>
+<li>该变量没有包含在具有其他变量的不定式中</li>
+</ol>
+<ul>
+<li>不满足：low&lt;up</li>
+</ul>
+<h2 id="synchronized和volatile的比较"><a href="#synchronized和volatile的比较" class="headerlink" title="synchronized和volatile的比较"></a>synchronized和volatile的比较</h2><ul>
+<li>volatile不需要加锁，比synchronize更轻量级，不会阻塞线程</li>
+<li>从内存可见性的角度来讲，volatile的写操作相当于加锁，读操作相当于解锁</li>
+<li>synchronized既能保证可见性又能保证原子性，而volatile只能保证可见性，不能保证原子性</li>
+</ul>
+<p>##补充：<br>对64位（double、long）变量的读写有可能不是原子操作：</p>
+<ul>
+<li>Java内存模型(JMM)允许JVM将没有被volatile修饰的64位数据类型的读写操作划分成两次32位的读写操作来进行</li>
+</ul>
+<p><b>导致的问题：</b>有可能会出现读取到“半个变量”的情况<br>解决方法：添加<code>volatile</code>关键字</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/10/ITEM项目逻辑梳理之启动(一)/" rel="next" title="ITEM项目逻辑梳理之启动(一)">
+                <i class="fa fa-chevron-left"></i> ITEM项目逻辑梳理之启动(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDYwMi8xMTE0MA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="饭饭君~" />
+            
+              <p class="site-author-name" itemprop="name">饭饭君~</p>
+              <p class="site-description motion-element" itemprop="description">希望我们都能追寻到美丽</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yangcf" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:mailto:yang.chf@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="836843022" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#共享变量可见性实现原理"><span class="nav-number">1.</span> <span class="nav-text">共享变量可见性实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized实现可见性"><span class="nav-number">1.1.</span> <span class="nav-text">synchronized实现可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JMM关于synchronize的两点规定："><span class="nav-number">1.1.0.1.</span> <span class="nav-text">JMM关于synchronize的两点规定：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程执行互斥代码的过程"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">线程执行互斥代码的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#补充知识"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">补充知识</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重排序"><span class="nav-number">1.1.0.3.1.</span> <span class="nav-text">重排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#as-if-serial"><span class="nav-number">1.1.0.3.2.</span> <span class="nav-text">as-if-serial</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized实现可见性代码"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">synchronized实现可见性代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可见性分析"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">可见性分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不可见的原因："><span class="nav-number">1.1.0.5.1.</span> <span class="nav-text">不可见的原因：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#synchronized解决方案"><span class="nav-number">1.1.0.5.2.</span> <span class="nav-text">synchronized解决方案</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile实现可见性"><span class="nav-number">1.2.</span> <span class="nav-text">volatile实现可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile如何实现内存可见性"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">volatile如何实现内存可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#线程写volatile变量的过程："><span class="nav-number">1.2.0.1.1.</span> <span class="nav-text">线程写volatile变量的过程：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#线程读volatile变量的过程："><span class="nav-number">1.2.0.1.2.</span> <span class="nav-text">线程读volatile变量的过程：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile不能保证原子性"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">volatile不能保证原子性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解决volatile不能保证自增操作原子性的问题"><span class="nav-number">1.2.0.2.1.</span> <span class="nav-text">解决volatile不能保证自增操作原子性的问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile的适用场景"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">volatile的适用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized和volatile的比较"><span class="nav-number">1.3.</span> <span class="nav-text">synchronized和volatile的比较</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">饭饭君~</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("w7DAC9LjsACNysJ7gC9upTgz-gzGzoHsz", "0NrqzKi4u8rpPGOO1E1YEorW");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+	
+  <!--</div>
+  
+</div>-->
+<script type='text/javascript'>
+function addLink() {
+    var body_element = document.getElementsByTagName('body')[0];
+    var selection;
+if(window.getSelection){//DOM,FF,Webkit,Chrome,IE10
+selection = window.getSelection();
+
+
+}else if(document.getSelection){//IE10
+selection= document.getSelection();
+
+
+}else if(document.selection){//IE6+10-
+selection= document.selection.createRange().text;
+
+}else{
+selection= "";
+alert("浏览器兼容问题导致复制失败！");
+}
+    var pagelink = "<br /><br /> 文章来自饭饭君的个人博客,转载请注明来源: <a href='https://yangchaofan.coding.me'>https://yangchaofan.coding.me</a>"; 
+    var copy_text = selection + pagelink;
+    var new_div = document.createElement('div');
+    new_div.style.left='-99999px';
+    new_div.style.position='absolute';
+    body_element.appendChild(new_div );
+    new_div.innerHTML = copy_text ;
+    selection.selectAllChildren(new_div );
+    window.setTimeout(function() {
+        body_element.removeChild(new_div );
+    },0);
+}
+document.body.oncopy = addLink;
+</script>
+  
+	<script type="text/javascript"
+     color="99,184,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+</script>
+ 
+</body>
+</html>
