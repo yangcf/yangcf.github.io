@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="共享变量可见性实现原理多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实">
+<meta name="description" content="多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实现互斥锁，保证操作">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="共享变量可见性实现原理">
 <meta property="og:url" content="http://yangcf.github.io/2018/03/30/共享变量可见性实现原理/index.html">
 <meta property="og:site_name" content="时间一直在变">
-<meta property="og:description" content="共享变量可见性实现原理多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实">
+<meta property="og:description" content="多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实现互斥锁，保证操作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-30T08:21:06.574Z">
+<meta property="og:updated_time" content="2018-03-30T08:24:04.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="共享变量可见性实现原理">
-<meta name="twitter:description" content="共享变量可见性实现原理多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实">
+<meta name="twitter:description" content="多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实现互斥锁，保证操作">
 
 
 
@@ -372,8 +372,8 @@
 
       
         <hr>
-<h1 id="共享变量可见性实现原理"><a href="#共享变量可见性实现原理" class="headerlink" title="共享变量可见性实现原理"></a>共享变量可见性实现原理</h1><pre><code>多个线程共同使用的一个变量叫做共享变量。
-</code></pre><ul>
+<p>  多个线程共同使用的一个变量叫做共享变量。</p>
+<ul>
 <li>线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。</li>
 <li>不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。</li>
 </ul>
@@ -443,7 +443,7 @@
 <li>从内存可见性的角度来讲，volatile的写操作相当于加锁，读操作相当于解锁</li>
 <li>synchronized既能保证可见性又能保证原子性，而volatile只能保证可见性，不能保证原子性</li>
 </ul>
-<p>##补充：<br>对64位（double、long）变量的读写有可能不是原子操作：</p>
+<h2 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h2><p>对64位（double、long）变量的读写有可能不是原子操作：</p>
 <ul>
 <li>Java内存模型(JMM)允许JVM将没有被volatile修饰的64位数据类型的读写操作划分成两次32位的读写操作来进行</li>
 </ul>
@@ -640,7 +640,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#共享变量可见性实现原理"><span class="nav-number">1.</span> <span class="nav-text">共享变量可见性实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized实现可见性"><span class="nav-number">1.1.</span> <span class="nav-text">synchronized实现可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JMM关于synchronize的两点规定："><span class="nav-number">1.1.0.1.</span> <span class="nav-text">JMM关于synchronize的两点规定：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程执行互斥代码的过程"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">线程执行互斥代码的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#补充知识"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">补充知识</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重排序"><span class="nav-number">1.1.0.3.1.</span> <span class="nav-text">重排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#as-if-serial"><span class="nav-number">1.1.0.3.2.</span> <span class="nav-text">as-if-serial</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized实现可见性代码"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">synchronized实现可见性代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可见性分析"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">可见性分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不可见的原因："><span class="nav-number">1.1.0.5.1.</span> <span class="nav-text">不可见的原因：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#synchronized解决方案"><span class="nav-number">1.1.0.5.2.</span> <span class="nav-text">synchronized解决方案</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile实现可见性"><span class="nav-number">1.2.</span> <span class="nav-text">volatile实现可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile如何实现内存可见性"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">volatile如何实现内存可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#线程写volatile变量的过程："><span class="nav-number">1.2.0.1.1.</span> <span class="nav-text">线程写volatile变量的过程：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#线程读volatile变量的过程："><span class="nav-number">1.2.0.1.2.</span> <span class="nav-text">线程读volatile变量的过程：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile不能保证原子性"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">volatile不能保证原子性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解决volatile不能保证自增操作原子性的问题"><span class="nav-number">1.2.0.2.1.</span> <span class="nav-text">解决volatile不能保证自增操作原子性的问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile的适用场景"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">volatile的适用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized和volatile的比较"><span class="nav-number">1.3.</span> <span class="nav-text">synchronized和volatile的比较</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized实现可见性"><span class="nav-number">1.</span> <span class="nav-text">synchronized实现可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JMM关于synchronize的两点规定："><span class="nav-number">1.0.1.</span> <span class="nav-text">JMM关于synchronize的两点规定：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程执行互斥代码的过程"><span class="nav-number">1.0.2.</span> <span class="nav-text">线程执行互斥代码的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#补充知识"><span class="nav-number">1.0.3.</span> <span class="nav-text">补充知识</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重排序"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">重排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#as-if-serial"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">as-if-serial</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized实现可见性代码"><span class="nav-number">1.0.4.</span> <span class="nav-text">synchronized实现可见性代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可见性分析"><span class="nav-number">1.0.5.</span> <span class="nav-text">可见性分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不可见的原因："><span class="nav-number">1.0.5.1.</span> <span class="nav-text">不可见的原因：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#synchronized解决方案"><span class="nav-number">1.0.5.2.</span> <span class="nav-text">synchronized解决方案</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile实现可见性"><span class="nav-number">2.</span> <span class="nav-text">volatile实现可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile如何实现内存可见性"><span class="nav-number">2.0.1.</span> <span class="nav-text">volatile如何实现内存可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#线程写volatile变量的过程："><span class="nav-number">2.0.1.1.</span> <span class="nav-text">线程写volatile变量的过程：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#线程读volatile变量的过程："><span class="nav-number">2.0.1.2.</span> <span class="nav-text">线程读volatile变量的过程：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile不能保证原子性"><span class="nav-number">2.0.2.</span> <span class="nav-text">volatile不能保证原子性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解决volatile不能保证自增操作原子性的问题"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">解决volatile不能保证自增操作原子性的问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile的适用场景"><span class="nav-number">2.0.3.</span> <span class="nav-text">volatile的适用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized和volatile的比较"><span class="nav-number">3.</span> <span class="nav-text">synchronized和volatile的比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充："><span class="nav-number">4.</span> <span class="nav-text">补充：</span></a></li></ol></div>
             
 
           </div>
