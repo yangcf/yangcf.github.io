@@ -86,7 +86,7 @@
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安卓实现切换后台监控">
-<meta property="og:url" content="http://yangcf.github.io/2018/11/26/安卓实现切换后台监控/index.html">
+<meta property="og:url" content="https://yangchaofan.coding.me/2018/11/26/安卓实现切换后台监控/index.html">
 <meta property="og:site_name" content="时间一直在变">
 <meta property="og:description" content="上周四下午同事提了一个需求，想要监控app切换到后台和息屏的事件。原因是因为用户在使用app时大多数时候不会去主动关闭app，又因为我们的app和远程服务器有一个数据池的长连接，所以用户不主动退出就导致了连接数只增不减，最终down掉。所以他想在上述的两种事件中强制app退出。其实我有点怀疑服务器传输堵塞可能不是这个问题造成的，连接池都会有超时熔断的操作，应该不会有连接不收回的情况。但是他既然有">
 <meta property="og:locale" content="zh-Hans">
@@ -123,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="http://yangcf.github.io/2018/11/26/安卓实现切换后台监控/"/>
+  <link rel="canonical" href="https://yangchaofan.coding.me/2018/11/26/安卓实现切换后台监控/"/>
 
 
 
@@ -298,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yangcf.github.io/2018/11/26/安卓实现切换后台监控/">
+    <link itemprop="mainEntityOfPage" href="https://yangchaofan.coding.me/2018/11/26/安卓实现切换后台监控/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="饭饭君~">
@@ -396,6 +396,16 @@
     
     
     
+	
+	
+		<div>
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束，感谢您的阅读-------------</div>
+    
+</div>
+		</div>
+	
 
 	<div>
       
@@ -410,8 +420,8 @@
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年11月26日 - 17:29</p>
   <p><span>最后更新:</span>2018年11月27日 - 11:32</p>
-  <p><span>原始链接:</span><a href="/2018/11/26/安卓实现切换后台监控/" title="安卓实现切换后台监控">http://yangcf.github.io/2018/11/26/安卓实现切换后台监控/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yangcf.github.io/2018/11/26/安卓实现切换后台监控/"  aria-label="复制成功！"></i></span>
+  <p><span>原始链接:</span><a href="/2018/11/26/安卓实现切换后台监控/" title="安卓实现切换后台监控">https://yangchaofan.coding.me/2018/11/26/安卓实现切换后台监控/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangchaofan.coding.me/2018/11/26/安卓实现切换后台监控/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -435,16 +445,37 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果我的文章有帮助到你，欢迎打赏~~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
 
     
-	
-		<div>
-			<div>
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="饭饭君~ 微信支付"/>
+        <p>微信支付</p>
+      </div>
     
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+
     
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="饭饭君~ 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
 </div>
-		</div>
+
+      </div>
+    
+
+    
 	
 
     <footer class="post-footer">
@@ -999,5 +1030,5 @@ document.body.oncopy = addLink;
 	})();
 </script>
  
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>
