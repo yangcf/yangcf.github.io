@@ -71,7 +71,7 @@
 
 
 
-  <meta name="keywords" content="java," />
+  <meta name="keywords" content="java学习," />
 
 
 
@@ -83,14 +83,14 @@
 
 
 <meta name="description" content="多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实现互斥锁，保证操作">
-<meta name="keywords" content="java">
+<meta name="keywords" content="java学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="共享变量可见性实现原理">
 <meta property="og:url" content="https://yangchaofan.coding.me/2018/03/30/共享变量可见性实现原理/index.html">
 <meta property="og:site_name" content="时间一直在变">
 <meta property="og:description" content="多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实现互斥锁，保证操作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-27T03:32:21.876Z">
+<meta property="og:updated_time" content="2018-11-27T09:37:41.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="共享变量可见性实现原理">
 <meta name="twitter:description" content="多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实现互斥锁，保证操作">
@@ -219,6 +219,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
@@ -245,16 +255,6 @@
               <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
             
             日程表
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-commonweal">
-          <a href="http://www.redcross.org.cn" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
-            
-            公益
           </a>
         </li>
       
@@ -337,6 +337,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -482,7 +504,7 @@
   <p><span>本文标题:</span><a href="/2018/03/30/共享变量可见性实现原理/">共享变量可见性实现原理</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年03月30日 - 16:19</p>
-  <p><span>最后更新:</span>2018年11月27日 - 11:32</p>
+  <p><span>最后更新:</span>2018年11月27日 - 17:37</p>
   <p><span>原始链接:</span><a href="/2018/03/30/共享变量可见性实现原理/" title="共享变量可见性实现原理">https://yangchaofan.coding.me/2018/03/30/共享变量可见性实现原理/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangchaofan.coding.me/2018/03/30/共享变量可见性实现原理/"  aria-label="复制成功！"></i></span>
   </p>
@@ -545,7 +567,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+            <a href="/tags/java学习/" rel="tag"><i class="fa fa-tag"></i> java学习</a>
           
         </div>
       
@@ -658,13 +680,22 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
