@@ -10,6 +10,8 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
 <meta name="theme-color" content="#222">
 <meta name="baidu-site-verification" content="vvumBnHdBA" />
 
@@ -57,10 +59,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.ico?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -88,7 +90,7 @@
 <meta property="og:site_name" content="时间一直在变">
 <meta property="og:description" content="react-native-barcodescanner在项目中遇到了扫描二维码的需求,在网上找了一圈，发现这个组件很好用，目前已经加入到项目中了，表现还是可以的。下面说的这个组件的配置和基本使用。 安装配置install1npm i --save react-native-barcodescanner link//In android/settings.gradle ... include &amp;a">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-10T11:26:08.885Z">
+<meta property="og:updated_time" content="2018-11-27T03:31:46.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RN常用组件之二维码识别">
 <meta name="twitter:description" content="react-native-barcodescanner在项目中遇到了扫描二维码的需求,在网上找了一圈，发现这个组件很好用，目前已经加入到项目中了，表现还是可以的。下面说的这个组件的配置和基本使用。 安装配置install1npm i --save react-native-barcodescanner link//In android/settings.gradle ... include &amp;a">
@@ -160,7 +162,9 @@
   
 
   <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
+    <div class="headband">
+	<a href="https://github.com/yangcf"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a></div>
+	
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -265,6 +269,7 @@
 
 
  </div>
+	  
     </header>
 
 	<!--<div id="container" class="container" >
@@ -396,17 +401,61 @@ compile project(&apos;:react-native-barcodescanner&apos;)
     
     
 
-    
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/03/07/RN常用组件之二维码识别/">RN常用组件之二维码识别</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
+  <p><span>发布时间:</span>2018年03月07日 - 08:41</p>
+  <p><span>最后更新:</span>2018年11月27日 - 11:31</p>
+  <p><span>原始链接:</span><a href="/2018/03/07/RN常用组件之二维码识别/" title="RN常用组件之二维码识别">http://yangcf.github.io/2018/03/07/RN常用组件之二维码识别/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yangcf.github.io/2018/03/07/RN常用组件之二维码识别/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      
+	</div>
 
     
 
     
+
+    
+	
+		<div>
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+		</div>
+	
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/RN常用组件系列/" rel="tag"># RN常用组件系列</a>
+            <a href="/tags/RN常用组件系列/" rel="tag"><i class="fa fa-tag"></i> RN常用组件系列</a>
           
         </div>
       
@@ -419,8 +468,8 @@ compile project(&apos;:react-native-barcodescanner&apos;)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/06/ReactNative强烈推荐IDE/" rel="next" title="ReactNative强烈推荐IDE">
-                <i class="fa fa-chevron-left"></i> ReactNative强烈推荐IDE
+              <a href="/2018/03/07/RN常用组件之SQLite/" rel="next" title="RN常用组件之SQLite">
+                <i class="fa fa-chevron-left"></i> RN常用组件之SQLite
               </a>
             
           </div>
@@ -429,8 +478,8 @@ compile project(&apos;:react-native-barcodescanner&apos;)
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/07/RN常用组件之SQLite/" rel="prev" title="RN常用组件之SQLite">
-                RN常用组件之SQLite <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/10/ITEM项目逻辑梳理之启动(一)/" rel="prev" title="ITEM项目逻辑梳理之启动(一)">
+                ITEM项目逻辑梳理之启动(一) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -459,11 +508,6 @@ compile project(&apos;:react-native-barcodescanner&apos;)
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDYwMi8xMTE0MA=="></div>
-    </div>
 
   
 
@@ -517,7 +561,7 @@ compile project(&apos;:react-native-barcodescanner&apos;)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -615,11 +659,9 @@ compile project(&apos;:react-native-barcodescanner&apos;)
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+ <!-- <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
 
 
-
-  <span class="post-meta-divider">|</span>
 
 
 
@@ -627,6 +669,15 @@ compile project(&apos;:react-native-barcodescanner&apos;)
 
 
 
+  <span class="post-meta-divider">|</span>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共5.2k字</span>
+</div>
 
         
 
@@ -755,17 +806,6 @@ compile project(&apos;:react-native-barcodescanner&apos;)
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 

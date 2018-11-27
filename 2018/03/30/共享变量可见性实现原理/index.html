@@ -10,6 +10,8 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
 <meta name="theme-color" content="#222">
 <meta name="baidu-site-verification" content="vvumBnHdBA" />
 
@@ -57,10 +59,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.ico?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -88,7 +90,7 @@
 <meta property="og:site_name" content="时间一直在变">
 <meta property="og:description" content="多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实现互斥锁，保证操作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-30T08:24:04.193Z">
+<meta property="og:updated_time" content="2018-11-27T03:32:21.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="共享变量可见性实现原理">
 <meta name="twitter:description" content="多个线程共同使用的一个变量叫做共享变量。  线程对共享变量的所有操作都必须在自己的工作内存中进行，不能直接从主内存中读写。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递必须通过主内存完成。  java语言层面实现可见性的方式：  synchronized volatilesynchronized实现可见性synchronized最常见的一种理解是可以实现互斥锁，保证操作">
@@ -160,7 +162,9 @@
   
 
   <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
+    <div class="headband">
+	<a href="https://github.com/yangcf"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a></div>
+	
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -265,6 +269,7 @@
 
 
  </div>
+	  
     </header>
 
 	<!--<div id="container" class="container" >
@@ -391,7 +396,7 @@
 <ul>
 <li>编译器优化的重排序（编译器优化）</li>
 <li>指令级并行重排序（处理器优化）</li>
-<li>内存系统的重排序（处理器优化）<h5 id="as-if-serial"><a href="#as-if-serial" class="headerlink" title="as-if-serial"></a>as-if-serial</h5>无论如何重排序，程序执行的结果应该与代码顺序执行的结果一致。（java编译器、运行时和处理器都会保证java在单线程下遵循as-if-serial语义）<h4 id="synchronized实现可见性代码"><a href="#synchronized实现可见性代码" class="headerlink" title="synchronized实现可见性代码"></a>synchronized实现可见性代码</h4><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedDemo</span> </span>&#123; </span><br><span class="line">    <span class="comment">//共享变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> ready = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> number = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//写操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">()</span></span>&#123;</span><br><span class="line">     ready = <span class="keyword">true</span>;	<span class="comment">//1.1</span></span><br><span class="line">     number = <span class="number">2</span>;	<span class="comment">//1.2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//读操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(ready)&#123;	<span class="comment">//2.1</span></span><br><span class="line">      result = number*<span class="number">3</span>;	<span class="comment">//2.2</span></span><br><span class="line">     &#125;</span><br><span class="line">     System.out.println(<span class="string">"result的值为："</span> + result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//内部线程类</span></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ReadWriteThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">     <span class="comment">//根据构造方法中传入的flag参数，确定线程执行读操作还是写操作</span></span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">boolean</span> flag;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="title">ReadWriteThread</span><span class="params">(<span class="keyword">boolean</span> flag)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.flag = flag;</span><br><span class="line">     &#125;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">          <span class="comment">//构造方法中传入true，执行写操作</span></span><br><span class="line">          write();</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          <span class="comment">//构造方法中传入false，执行读操作</span></span><br><span class="line">          read();</span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">     SynchronizedDemo synDemo = <span class="keyword">new</span> SynchronizedDemo();</span><br><span class="line">     <span class="comment">//启动线程执行写操作</span></span><br><span class="line">     synDemo .<span class="keyword">new</span> ReadWriteThread(<span class="keyword">true</span>).start();</span><br><span class="line">     <span class="comment">//启动线程执行读操作</span></span><br><span class="line">     synDemo.<span class="keyword">new</span> ReadWriteThread(<span class="keyword">false</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>内存系统的重排序（处理器优化）<h5 id="as-if-serial"><a href="#as-if-serial" class="headerlink" title="as-if-serial"></a>as-if-serial</h5>无论如何重排序，程序执行的结果应该与代码顺序执行的结果一致。（java编译器、运行时和处理器都会保证java在单线程下遵循as-if-serial语义）<h4 id="synchronized实现可见性代码"><a href="#synchronized实现可见性代码" class="headerlink" title="synchronized实现可见性代码"></a>synchronized实现可见性代码</h4><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedDemo</span> </span>&#123;</span><br><span class="line">    <span class="comment">//共享变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> ready = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> number = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//写操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">()</span></span>&#123;</span><br><span class="line">     ready = <span class="keyword">true</span>;	<span class="comment">//1.1</span></span><br><span class="line">     number = <span class="number">2</span>;	<span class="comment">//1.2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//读操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(ready)&#123;	<span class="comment">//2.1</span></span><br><span class="line">      result = number*<span class="number">3</span>;	<span class="comment">//2.2</span></span><br><span class="line">     &#125;</span><br><span class="line">     System.out.println(<span class="string">"result的值为："</span> + result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//内部线程类</span></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ReadWriteThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">     <span class="comment">//根据构造方法中传入的flag参数，确定线程执行读操作还是写操作</span></span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">boolean</span> flag;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="title">ReadWriteThread</span><span class="params">(<span class="keyword">boolean</span> flag)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.flag = flag;</span><br><span class="line">     &#125;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">          <span class="comment">//构造方法中传入true，执行写操作</span></span><br><span class="line">          write();</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          <span class="comment">//构造方法中传入false，执行读操作</span></span><br><span class="line">          read();</span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">     SynchronizedDemo synDemo = <span class="keyword">new</span> SynchronizedDemo();</span><br><span class="line">     <span class="comment">//启动线程执行写操作</span></span><br><span class="line">     synDemo .<span class="keyword">new</span> ReadWriteThread(<span class="keyword">true</span>).start();</span><br><span class="line">     <span class="comment">//启动线程执行读操作</span></span><br><span class="line">     synDemo.<span class="keyword">new</span> ReadWriteThread(<span class="keyword">false</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="可见性分析"><a href="#可见性分析" class="headerlink" title="可见性分析"></a>可见性分析</h4><h5 id="不可见的原因："><a href="#不可见的原因：" class="headerlink" title="不可见的原因："></a>不可见的原因：</h5><ol>
@@ -416,7 +421,7 @@
 <li>从主内存中读取volatile变量的最新值到线程的工作内存中</li>
 <li>从工作内存中读取volatile变量的副本</li>
 </ol>
-<h4 id="volatile不能保证原子性"><a href="#volatile不能保证原子性" class="headerlink" title="volatile不能保证原子性"></a>volatile不能保证原子性</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.Lock;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VolatileDemo</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.number;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increase</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">   Thread.sleep(<span class="number">100</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">   <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="keyword">this</span>.number++;  </span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">  <span class="keyword">final</span> VolatileDemo volDemo = <span class="keyword">new</span> VolatileDemo();</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">500</span> ; i++)&#123;</span><br><span class="line">   <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     volDemo.increase();</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;).start();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//如果还有子线程在运行，主线程就让出CPU资源，</span></span><br><span class="line">  <span class="comment">//直到所有的子线程都运行完了，主线程再继续往下执行</span></span><br><span class="line">  <span class="keyword">while</span>(Thread.activeCount() &gt; <span class="number">1</span>)&#123;</span><br><span class="line">   Thread.yield();</span><br><span class="line">  &#125;</span><br><span class="line">  System.out.println(<span class="string">"number : "</span> + volDemo.getNumber());</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="volatile不能保证原子性"><a href="#volatile不能保证原子性" class="headerlink" title="volatile不能保证原子性"></a>volatile不能保证原子性</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.Lock;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VolatileDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.number;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increase</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">   Thread.sleep(<span class="number">100</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">   <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="keyword">this</span>.number++;  </span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">  <span class="keyword">final</span> VolatileDemo volDemo = <span class="keyword">new</span> VolatileDemo();</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">500</span> ; i++)&#123;</span><br><span class="line">   <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     volDemo.increase();</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;).start();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//如果还有子线程在运行，主线程就让出CPU资源，</span></span><br><span class="line">  <span class="comment">//直到所有的子线程都运行完了，主线程再继续往下执行</span></span><br><span class="line">  <span class="keyword">while</span>(Thread.activeCount() &gt; <span class="number">1</span>)&#123;</span><br><span class="line">   Thread.yield();</span><br><span class="line">  &#125;</span><br><span class="line">  System.out.println(<span class="string">"number : "</span> + volDemo.getNumber());</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行上面的代码会发现输出有时会出现接近500，但是不等于500的情况，这就是因为<code>number++</code>这步操作不属于原子操作造成的。</p>
 <h5 id="解决volatile不能保证自增操作原子性的问题"><a href="#解决volatile不能保证自增操作原子性的问题" class="headerlink" title="解决volatile不能保证自增操作原子性的问题"></a>解决volatile不能保证自增操作原子性的问题</h5><ol>
 <li>使用<code>synchronized</code>关键字</li>
@@ -455,17 +460,61 @@
     
     
 
-    
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/03/30/共享变量可见性实现原理/">共享变量可见性实现原理</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
+  <p><span>发布时间:</span>2018年03月30日 - 16:19</p>
+  <p><span>最后更新:</span>2018年11月27日 - 11:32</p>
+  <p><span>原始链接:</span><a href="/2018/03/30/共享变量可见性实现原理/" title="共享变量可见性实现原理">http://yangcf.github.io/2018/03/30/共享变量可见性实现原理/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yangcf.github.io/2018/03/30/共享变量可见性实现原理/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      
+	</div>
 
     
 
     
+
+    
+	
+		<div>
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+		</div>
+	
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
           
         </div>
       
@@ -520,11 +569,6 @@
           
 
   
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDYwMi8xMTE0MA=="></div>
-    </div>
-
-  
 
 
 
@@ -576,7 +620,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -674,11 +718,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+ <!-- <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
 
 
-
-  <span class="post-meta-divider">|</span>
 
 
 
@@ -686,6 +728,15 @@
 
 
 
+  <span class="post-meta-divider">|</span>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共5.2k字</span>
+</div>
 
         
 
@@ -814,17 +865,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 
