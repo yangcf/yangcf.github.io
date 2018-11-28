@@ -100,7 +100,7 @@
 <meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/jnin.jpg">
 <meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/src.jpg">
 <meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/map.jpg">
-<meta property="og:updated_time" content="2018-11-28T09:05:28.068Z">
+<meta property="og:updated_time" content="2018-11-28T09:09:55.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓Android集成百度地图sdk">
 <meta name="twitter:description" content="上周刚刚给公司的app集成了百度地图的sdk，所以现在把方法整理一下，希望对各位有帮助。 想要在app中使用百度地图有下边几个步骤：123注册百度开发者账号，创建应用获取id，指定路径下载对应功能的SDK包并导入自己的项目照猫画虎让程序跑起来 注册百度开发者账号 我记得以前还能用邮箱注册百度账号的，现在好像只能用手机了。 传送门1|传送门2(先进1号门注册百度账号，再进2号门注册百度开放平台开发">
@@ -425,7 +425,7 @@
 <p><img src="/2018/11/28/安卓Android集成百度地图sdk/sdk.jpg" alt="下载sdk数据包"></p>
 <p>压缩包里有4项，我们首先要将libs文件夹里的所有东西添加到自己程序的libs中，如下图。</p>
 <p><img src="/2018/11/28/安卓Android集成百度地图sdk/lib.jpg" alt="下载sdk数据包"></p>
-<p>再将上图中的<code>BaiduNavi_AndroidSDK.zip</code>解压,将jniLibs文件夹添加到我们自己项目的<code>src/main</code>下(这里的libs现在不加也没事，用到其中的方法再加即可)</p>
+<p>再将上图中的<code>BaiduNavi_AndroidSDK.zip</code>解压,<del>将jniLibs文件夹添加到我们自己项目的<code>src/main</code>下(这里的libs现在不加也没事，用到其中的方法再加即可)</del><br>直接在<code>src/main</code>下创建<code>jniLibs</code>目录即可</p>
 <p><img src="/2018/11/28/安卓Android集成百度地图sdk/jnin.jpg" alt="下载sdk数据包"></p>
 <p><img src="/2018/11/28/安卓Android集成百度地图sdk/src.jpg" alt="下载sdk数据包"></p>
 <h1 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h1><p>接下来给<code>app</code>下的<code>bulid.gradle</code>加入：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sourceSets</span>&#123;</span><br><span class="line">  main&#123;</span><br><span class="line">       jniLibs.srcDir <span class="string">'libs'</span>  </span><br><span class="line">       <span class="comment">//说明so的路径为该libs路径，关联所有地图SDK的so文件</span></span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"><span class="keyword">dependencies</span>&#123;</span><br><span class="line">  <span class="keyword">compile</span> files(<span class="string">'libs/BaiduLBS_Android.jar'</span>)<span class="comment">//添加jar依赖</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
@@ -468,7 +468,7 @@
   <p><span>本文标题:</span><a href="/2018/11/28/安卓Android集成百度地图sdk/">安卓Android集成百度地图sdk</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年11月28日 - 13:34</p>
-  <p><span>最后更新:</span>2018年11月28日 - 17:05</p>
+  <p><span>最后更新:</span>2018年11月28日 - 17:09</p>
   <p><span>原始链接:</span><a href="/2018/11/28/安卓Android集成百度地图sdk/" title="安卓Android集成百度地图sdk">https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/"  aria-label="复制成功！"></i></span>
   </p>
