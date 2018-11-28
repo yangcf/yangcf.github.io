@@ -71,7 +71,7 @@
 
 
 
-  <meta name="keywords" content="Android小功能," />
+  <meta name="keywords" content="百度地图," />
 
 
 
@@ -82,18 +82,29 @@
 
 
 
-<meta name="description" content="上周刚刚给公司的app集成了百度地图的sdk，所以现在把方法整理一下，希望对各位有帮助。 想要在app中使用百度地图有下边几个步骤：1234注册百度开发者账号创建应用获取id，指定路径下载对应功能的SDK包并导入自己的项目照猫画虎让程序跑起来">
-<meta name="keywords" content="Android小功能">
+<meta name="description" content="上周刚刚给公司的app集成了百度地图的sdk，所以现在把方法整理一下，希望对各位有帮助。 想要在app中使用百度地图有下边几个步骤：123注册百度开发者账号，创建应用获取id，指定路径下载对应功能的SDK包并导入自己的项目照猫画虎让程序跑起来 注册百度开发者账号 我记得以前还能用邮箱注册百度账号的，现在好像只能用手机了。 传送门1|传送门2(先进1号门注册百度账号，再进2号门注册百度开放平台开发">
+<meta name="keywords" content="百度地图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安卓Android集成百度地图sdk">
 <meta property="og:url" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/index.html">
 <meta property="og:site_name" content="时间一直在变">
-<meta property="og:description" content="上周刚刚给公司的app集成了百度地图的sdk，所以现在把方法整理一下，希望对各位有帮助。 想要在app中使用百度地图有下边几个步骤：1234注册百度开发者账号创建应用获取id，指定路径下载对应功能的SDK包并导入自己的项目照猫画虎让程序跑起来">
+<meta property="og:description" content="上周刚刚给公司的app集成了百度地图的sdk，所以现在把方法整理一下，希望对各位有帮助。 想要在app中使用百度地图有下边几个步骤：123注册百度开发者账号，创建应用获取id，指定路径下载对应功能的SDK包并导入自己的项目照猫画虎让程序跑起来 注册百度开发者账号 我记得以前还能用邮箱注册百度账号的，现在好像只能用手机了。 传送门1|传送门2(先进1号门注册百度账号，再进2号门注册百度开放平台开发">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-28T05:40:31.378Z">
+<meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/注册.PNG">
+<meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/注册成功.PNG">
+<meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/配置.jpg">
+<meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/SHA1.PNG">
+<meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/配置完成.jpg">
+<meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/sdk.jpg">
+<meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/lib.jpg">
+<meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/jnin.jpg">
+<meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/src.jpg">
+<meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/map.jpg">
+<meta property="og:updated_time" content="2018-11-28T08:57:14.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓Android集成百度地图sdk">
-<meta name="twitter:description" content="上周刚刚给公司的app集成了百度地图的sdk，所以现在把方法整理一下，希望对各位有帮助。 想要在app中使用百度地图有下边几个步骤：1234注册百度开发者账号创建应用获取id，指定路径下载对应功能的SDK包并导入自己的项目照猫画虎让程序跑起来">
+<meta name="twitter:description" content="上周刚刚给公司的app集成了百度地图的sdk，所以现在把方法整理一下，希望对各位有帮助。 想要在app中使用百度地图有下边几个步骤：123注册百度开发者账号，创建应用获取id，指定路径下载对应功能的SDK包并导入自己的项目照猫画虎让程序跑起来 注册百度开发者账号 我记得以前还能用邮箱注册百度账号的，现在好像只能用手机了。 传送门1|传送门2(先进1号门注册百度账号，再进2号门注册百度开放平台开发">
+<meta name="twitter:image" content="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/注册.PNG">
 
 
 
@@ -400,7 +411,34 @@
       
         <hr>
 <p>上周刚刚给公司的app集成了百度地图的sdk，所以现在把方法整理一下，希望对各位有帮助。</p>
-<p>想要在app中使用百度地图有下边几个步骤：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">注册百度开发者账号</span><br><span class="line">创建应用获取<span class="built_in">id</span>，指定路径</span><br><span class="line">下载对应功能的SDK包并导入自己的项目</span><br><span class="line">照猫画虎让程序跑起来</span><br></pre></td></tr></table></figure></p>
+<p>想要在app中使用百度地图有下边几个步骤：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注册百度开发者账号，创建应用获取<span class="built_in">id</span>，指定路径</span><br><span class="line">下载对应功能的SDK包并导入自己的项目</span><br><span class="line">照猫画虎让程序跑起来</span><br></pre></td></tr></table></figure></p>
+<h1 id="注册百度开发者账号"><a href="#注册百度开发者账号" class="headerlink" title="注册百度开发者账号"></a>注册百度开发者账号</h1><p><img src="/2018/11/28/安卓Android集成百度地图sdk/注册.PNG" alt="注册"></p>
+<p>我记得以前还能用邮箱注册百度账号的，现在好像只能用手机了。</p>
+<p><a href="https://passport.baidu.com/" target="_blank" rel="noopener">传送门1</a>|<a href="http://lbsyun.baidu.com/apiconsole/key/" target="_blank" rel="noopener">传送门2</a>(先进1号门注册百度账号，再进2号门注册百度开放平台开发者)</p>
+<p><img src="/2018/11/28/安卓Android集成百度地图sdk/注册成功.PNG" alt="注册成功"><br>注册成功后去邮箱验证一下，点击申请密钥，进入配置界面。</p>
+<p><img src="/2018/11/28/安卓Android集成百度地图sdk/配置.jpg" alt="感谢微信打码"></p>
+<p>根据你需要的功能勾选，不想挑的同学全选也行。<br>这里获取<code>SHA1</code>比较麻烦，可以参考<a href="https://blog.csdn.net/csdnhejingzhou/article/details/50643246" target="_blank" rel="noopener">这篇博文</a></p>
+<p>通过<code>keytool</code>工具可以快速获取<code>开发版SHA1</code>，你如果只是自己学习一下，那么开发版和发布版都填这个也可以。密钥默认是：android</p>
+<p>灵魂打码<br><img src="/2018/11/28/安卓Android集成百度地图sdk/SHA1.PNG" alt="灵魂打码"></p>
+<p>完成后点击提交，如下图所示成功，进入第二步。<br><img src="/2018/11/28/安卓Android集成百度地图sdk/配置完成.jpg" alt="配置完成"></p>
+<h1 id="下载sdk数据包"><a href="#下载sdk数据包" class="headerlink" title="下载sdk数据包"></a><a href="http://lbsyun.baidu.com/index.php?title=androidsdk/sdkandev-download" target="_blank" rel="noopener">下载sdk数据包</a></h1><p>百度提供了许多官方的<a href="http://mapopen-pub-androidsdk.cdn.bcebos.com/map/BaiduMap_AndroidSDK_v5.2.1_Sample_demo.zip" target="_blank" rel="noopener">例子</a>，大家可以下载看看，基本上所有的基础功能都有演示。</p>
+<p><img src="/2018/11/28/安卓Android集成百度地图sdk/sdk.jpg" alt="下载sdk数据包"></p>
+<p>压缩包里有4项，我们首先要将libs文件夹里的所有东西添加到自己程序的libs中，如下图。</p>
+<p><img src="/2018/11/28/安卓Android集成百度地图sdk/lib.jpg" alt="下载sdk数据包"></p>
+<p>再将上图中的<code>BaiduNavi_AndroidSDK.zip</code>解压,将jniLibs文件夹添加到我们自己项目的<code>src/main</code>下(这里的libs现在不加也没事，用到其中的方法再加即可)</p>
+<p><img src="/2018/11/28/安卓Android集成百度地图sdk/jnin.jpg" alt="下载sdk数据包"></p>
+<p><img src="/2018/11/28/安卓Android集成百度地图sdk/src.jpg" alt="下载sdk数据包"></p>
+<h1 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h1><p>接下来给<code>app</code>下的<code>bulid.gradle</code>加入：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sourceSets</span>&#123;</span><br><span class="line">  main&#123;</span><br><span class="line">       jniLibs.srcDir <span class="string">'libs'</span>  </span><br><span class="line">       <span class="comment">//说明so的路径为该libs路径，关联所有地图SDK的so文件</span></span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"><span class="keyword">dependencies</span>&#123;</span><br><span class="line">  <span class="keyword">compile</span> files(<span class="string">'libs/BaiduLBS_Android.jar'</span>)<span class="comment">//添加jar依赖</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>这段的意思是将<code>libs</code>下的<code>os</code>文件加载到<code>src/main/jniLibs</code>中。</p>
+<p>在<code>AndroidManifest</code>中添加开发密钥、所需权限信息：<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="comment">//开发者信息</span></span><br><span class="line">&lt;application&gt;  </span><br><span class="line">    &lt;meta-<span class="keyword">data</span>  </span><br><span class="line">        android:<span class="keyword">name</span>=<span class="string">"com.baidu.lbsapi.API_KEY"</span>  </span><br><span class="line">        android:value=<span class="string">"开发者 key"</span> /&gt;  </span><br><span class="line">&lt;/application&gt;</span><br><span class="line">...</span><br><span class="line"><span class="comment">//百度sdk所需权限</span></span><br><span class="line">&lt;uses-permission android:<span class="keyword">name</span>=<span class="string">"android.permission.ACCESS_NETWORK_STATE"</span>/&gt;</span><br><span class="line"><span class="comment">//获取设备网络状态，禁用后无法获取网络状态</span></span><br><span class="line">&lt;uses-permission android:<span class="keyword">name</span>=<span class="string">"android.permission.INTERNET"</span>/&gt;</span><br><span class="line"><span class="comment">//网络权限，当禁用后，无法进行检索等相关业务</span></span><br><span class="line">&lt;uses-permission android:<span class="keyword">name</span>=<span class="string">"android.permission.READ_PHONE_STATE"</span> /&gt;</span><br><span class="line"><span class="comment">//读取设备硬件信息，统计数据</span></span><br><span class="line">&lt;uses-permission android:<span class="keyword">name</span>=<span class="string">"com.android.launcher.permission.READ_SETTINGS"</span> /&gt;</span><br><span class="line"><span class="comment">//读取系统信息，包含系统版本等信息，用作统计</span></span><br><span class="line">&lt;uses-permission android:<span class="keyword">name</span>=<span class="string">"android.permission.ACCESS_WIFI_STATE"</span> /&gt;</span><br><span class="line"><span class="comment">//获取设备的网络状态，鉴权所需网络代理</span></span><br><span class="line">&lt;uses-permission android:<span class="keyword">name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</span><br><span class="line"><span class="comment">//允许sd卡写权限，需写入地图数据，禁用后无法显示地图</span></span><br><span class="line">&lt;uses-permission android:<span class="keyword">name</span>=<span class="string">"android.permission.WRITE_SETTINGS"</span> /&gt;</span><br><span class="line"><span class="comment">//获取统计数据</span></span><br><span class="line">&lt;uses-permission android:<span class="keyword">name</span>=<span class="string">"android.permission.CAMERA"</span> /&gt;  </span><br><span class="line"><span class="comment">//使用步行AR导航，配置Camera权限</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p><strong>安卓6.0以后有些<a href="https://blog.csdn.net/cui130/article/details/80772186" target="_blank" rel="noopener">权限</a>不能直接申请了，得在代码里动态获取，请注意！</strong></p>
+<p>编译通过后，配置阶段就完成了。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>首先写布局文件，需要加入百度提供的<code>MapView</code>:<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//layout</span></span><br><span class="line">...</span><br><span class="line">&lt;com.baidu.mapapi.map.<span class="type">MapView</span>  </span><br><span class="line">    android:id=<span class="string">"@+id/bmapView"</span>  </span><br><span class="line">    android:layout_width=<span class="string">"fill_parent"</span>  </span><br><span class="line">    android:layout_height=<span class="string">"fill_parent"</span>  </span><br><span class="line">    android:clickable=<span class="string">"true"</span> /&gt;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//java</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">//DemoApplication.class</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void onCreate() &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        <span class="comment">//在使用SDK各组件之前初始化context信息，传入ApplicationContext   </span></span><br><span class="line">        <span class="type">SDKInitializer</span>.initialize(<span class="keyword">this</span>);</span><br><span class="line">        <span class="comment">//自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.</span></span><br><span class="line">        <span class="comment">//包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。</span></span><br><span class="line">        <span class="type">SDKInitializer</span>.setCoordType(<span class="type">CoordType</span>.<span class="type">BD09LL</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="comment">//MainActivity.class</span></span><br><span class="line">...</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="type">MapView</span> mMapView = <span class="literal">null</span>;  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) &#123;  </span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);    </span><br><span class="line">        setContentView(<span class="type">R</span>.layout.activity_main);  </span><br><span class="line">        <span class="comment">//获取地图控件引用  </span></span><br><span class="line">        mMapView = (<span class="type">MapView</span>) findViewById(<span class="type">R</span>.id.bmapView);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> void onDestroy() &#123;  </span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        <span class="comment">//在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理</span></span><br><span class="line">        mMapView.onDestroy();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> void onResume() &#123;  </span><br><span class="line">        <span class="keyword">super</span>.onResume();  </span><br><span class="line">        <span class="comment">//在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理  </span></span><br><span class="line">        mMapView.onResume();  </span><br><span class="line">        &#125;  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">protected</span> void onPause() &#123;  </span><br><span class="line">        <span class="keyword">super</span>.onPause();  </span><br><span class="line">        <span class="comment">//在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理  </span></span><br><span class="line">        mMapView.onPause();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p><code>DemoApplication</code>最好在项目启动时就加载。</p>
+<p>百度地图SDK接入已完成，具体功能请参照<a href="http://lbsyun.baidu.com/index.php?title=androidsdk/guide/create-map/showmap" target="_blank" rel="noopener">开发文档</a>和<a href="http://mapopen-pub-androidsdk.cdn.bcebos.com/map/BaiduMap_AndroidSDK_v5.2.1_Sample_demo.zip" target="_blank" rel="noopener">官方demo</a>，跑起来吧。<br><img src="/2018/11/28/安卓Android集成百度地图sdk/map.jpg" alt="map"></p>
+<p>如果出现白屏请检查网络连接和开发者信息是否正确。</p>
+<p>如有错误请指正(右侧栏有联系方式)~</p>
+<p>如果出现类似<code>found libBaiduMapSDK_map_v5_2_1.so error</code>这种错误，<strong>请检查你的sdk版本！不同组件的版本必须一致！！</strong></p>
 
       
     </div>
@@ -430,7 +468,7 @@
   <p><span>本文标题:</span><a href="/2018/11/28/安卓Android集成百度地图sdk/">安卓Android集成百度地图sdk</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年11月28日 - 13:34</p>
-  <p><span>最后更新:</span>2018年11月28日 - 13:40</p>
+  <p><span>最后更新:</span>2018年11月28日 - 16:57</p>
   <p><span>原始链接:</span><a href="/2018/11/28/安卓Android集成百度地图sdk/" title="安卓Android集成百度地图sdk">https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangchaofan.coding.me/2018/11/28/安卓Android集成百度地图sdk/"  aria-label="复制成功！"></i></span>
   </p>
@@ -493,7 +531,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android小功能/" rel="tag"><i class="fa fa-tag"></i> Android小功能</a>
+            <a href="/tags/百度地图/" rel="tag"><i class="fa fa-tag"></i> 百度地图</a>
           
         </div>
       
@@ -515,10 +553,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/28/Androidsdk/" rel="prev" title="Androidsdk">
-                Androidsdk <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -570,8 +604,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -590,7 +633,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -612,7 +655,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -658,6 +701,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注册百度开发者账号"><span class="nav-number">1.</span> <span class="nav-text">注册百度开发者账号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载sdk数据包"><span class="nav-number">2.</span> <span class="nav-text">下载sdk数据包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目配置"><span class="nav-number">3.</span> <span class="nav-text">项目配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -698,7 +757,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.3k字</span>
+  <span class="post-count">博客全站共6.3k字</span>
 </div>
 
         
