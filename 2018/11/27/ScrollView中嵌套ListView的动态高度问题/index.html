@@ -82,18 +82,18 @@
 
 
 
-<meta name="description" content="问题昨天写代码时突然遇到一个问题，当ListView处于ScrollView中时，如果动态的给ListView添加数据的话，并不会显示多行，仅显示一行。刚开始我以为是数据或者adapter的问题，检查了好多遍发现没问题，后来就一点点调试，发现ListView的高度是固定的，why？ 网上找到的答案是因为ListView和ScrollView的自动调节高度会冲突，解决的办法是自己去动态设置List">
+<meta name="description" content="问题 昨天写代码时突然遇到一个问题，当ListView处于ScrollView中时，如果动态的给ListView添加数据的话，并不会显示多行，仅显示一行。  开始我以为是数据或者adapter的问题，检查了好多遍发现没问题，后来就一点点调试，发现ListView的高度是固定的，why？ 网上找到的答案是因为ListView和ScrollView的自动调节高度会冲突，解决的办法是自己去动态设置Li">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ScrollView中嵌套ListView的动态高度问题">
 <meta property="og:url" content="https://yangchaofan.coding.me/2018/11/27/ScrollView中嵌套ListView的动态高度问题/index.html">
 <meta property="og:site_name" content="时间一直在变">
-<meta property="og:description" content="问题昨天写代码时突然遇到一个问题，当ListView处于ScrollView中时，如果动态的给ListView添加数据的话，并不会显示多行，仅显示一行。刚开始我以为是数据或者adapter的问题，检查了好多遍发现没问题，后来就一点点调试，发现ListView的高度是固定的，why？ 网上找到的答案是因为ListView和ScrollView的自动调节高度会冲突，解决的办法是自己去动态设置List">
+<meta property="og:description" content="问题 昨天写代码时突然遇到一个问题，当ListView处于ScrollView中时，如果动态的给ListView添加数据的话，并不会显示多行，仅显示一行。  开始我以为是数据或者adapter的问题，检查了好多遍发现没问题，后来就一点点调试，发现ListView的高度是固定的，why？ 网上找到的答案是因为ListView和ScrollView的自动调节高度会冲突，解决的办法是自己去动态设置Li">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-27T09:40:01.110Z">
+<meta property="og:updated_time" content="2018-11-29T02:01:19.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ScrollView中嵌套ListView的动态高度问题">
-<meta name="twitter:description" content="问题昨天写代码时突然遇到一个问题，当ListView处于ScrollView中时，如果动态的给ListView添加数据的话，并不会显示多行，仅显示一行。刚开始我以为是数据或者adapter的问题，检查了好多遍发现没问题，后来就一点点调试，发现ListView的高度是固定的，why？ 网上找到的答案是因为ListView和ScrollView的自动调节高度会冲突，解决的办法是自己去动态设置List">
+<meta name="twitter:description" content="问题 昨天写代码时突然遇到一个问题，当ListView处于ScrollView中时，如果动态的给ListView添加数据的话，并不会显示多行，仅显示一行。  开始我以为是数据或者adapter的问题，检查了好多遍发现没问题，后来就一点点调试，发现ListView的高度是固定的，why？ 网上找到的答案是因为ListView和ScrollView的自动调节高度会冲突，解决的办法是自己去动态设置Li">
 
 
 
@@ -382,6 +382,24 @@
           
 
           
+            <div class="post-wordcount">
+              
+
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1分钟
+                </span>
+              
+            </div>
+          
 
           
 
@@ -399,7 +417,10 @@
 
       
         <hr>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>昨天写代码时突然遇到一个问题，当<code>ListView</code>处于<code>ScrollView</code>中时，如果动态的给<code>ListView</code>添加数据的话，并不会显示多行，仅显示一行。刚开始我以为是数据或者<code>adapter</code>的问题，检查了好多遍发现没问题，后来就一点点调试，发现<code>ListView</code>的高度是固定的，why？</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><blockquote>
+<p>昨天写代码时突然遇到一个问题，当<code>ListView</code>处于<code>ScrollView</code>中时，如果动态的给<code>ListView</code>添加数据的话，并不会显示多行，仅显示一行。</p>
+</blockquote>
+<p>开始我以为是数据或者<code>adapter</code>的问题，检查了好多遍发现没问题，后来就一点点调试，发现<code>ListView</code>的高度是固定的，why？</p>
 <p>网上找到的答案是因为<code>ListView</code>和<code>ScrollView</code>的自动调节高度会冲突，解决的办法是自己去动态设置<code>ListView</code>要的高度。</p>
 <h2 id="具体代码"><a href="#具体代码" class="headerlink" title="具体代码"></a>具体代码</h2><figure class="highlight pony"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">** yjhxqlistForLsjl 数据集合</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">private void loadListViewForLsjl()&#123;</span><br><span class="line">  adapter = <span class="function"><span class="keyword">new</span> <span class="title">XlHistoryAdapter</span>(this, yjhxqlistForLsjl);<span class="comment">//初始化adapter</span></span></span><br><span class="line"><span class="function">  <span class="title">adapter</span>.<span class="title">enableCheck</span>(false);</span></span><br><span class="line"><span class="function">  <span class="title">adapter</span>.<span class="title">enableDelete</span>(false);</span></span><br><span class="line"><span class="function">  <span class="title">mListViewForLsjl</span>.<span class="title">setAdapter</span>(adapter);<span class="comment">//ListView设置adapter</span></span></span><br><span class="line"><span class="function">  <span class="title">ListAdapter</span> <span class="title">listAdapter</span> = <span class="title">adapter</span>;<span class="comment">//获得监听</span></span></span><br><span class="line"><span class="function">  <span class="title">View</span> <span class="title">item</span> = <span class="title">listAdapter</span>.<span class="title">getView</span>(<span class="number">0</span>, null, mListViewForLsjl);</span></span><br><span class="line"><span class="function">  <span class="title">item</span>.<span class="title">measure</span>(<span class="number">0</span>, <span class="number">0</span>);<span class="comment">//设置测量模式</span></span></span><br><span class="line"><span class="function">  <span class="title">ViewGroup</span>.<span class="title">LayoutParams</span> <span class="title">params</span> = <span class="title">mListViewForLsjl</span>.<span class="title">getLayoutParams</span>();</span></span><br><span class="line"><span class="function">  <span class="title">params</span>.<span class="title">height</span> = (yjhxqlistForLsjl.size()-1)*<span class="title">item</span>.<span class="title">getMeasuredHeight</span>()+<span class="title">item</span>.<span class="title">getMeasuredHeight</span>();</span></span><br><span class="line"><span class="function">  <span class="title">mListViewForLsjl</span>.<span class="title">setLayoutParams</span>(params);</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>可以看到其中有这么一段：<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  View item = listAdapter.getView(<span class="number">0</span>, null, mListViewForLsjl)<span class="comment">;</span></span><br><span class="line">  item.measure(<span class="number">0</span>, <span class="number">0</span>)<span class="comment">;</span></span><br><span class="line">  ViewGroup.LayoutParams params = mListViewForLsjl.getLayoutParams()<span class="comment">;</span></span><br><span class="line">  params.height = (<span class="name">yjhxqlistForLsjl.size</span>()<span class="number">-1</span>)*item.getMeasuredHeight()+item.getMeasuredHeight()<span class="comment">;</span></span><br><span class="line">  mListViewForLsjl.setLayoutParams(<span class="name">params</span>)<span class="comment">;</span></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -435,7 +456,7 @@
   <p><span>本文标题:</span><a href="/2018/11/27/ScrollView中嵌套ListView的动态高度问题/">ScrollView中嵌套ListView的动态高度问题</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年11月27日 - 10:05</p>
-  <p><span>最后更新:</span>2018年11月27日 - 17:40</p>
+  <p><span>最后更新:</span>2018年11月29日 - 10:01</p>
   <p><span>原始链接:</span><a href="/2018/11/27/ScrollView中嵌套ListView的动态高度问题/" title="ScrollView中嵌套ListView的动态高度问题">https://yangchaofan.coding.me/2018/11/27/ScrollView中嵌套ListView的动态高度问题/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangchaofan.coding.me/2018/11/27/ScrollView中嵌套ListView的动态高度问题/"  aria-label="复制成功！"></i></span>
   </p>

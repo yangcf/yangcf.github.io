@@ -82,18 +82,18 @@
 
 
 
-<meta name="description" content="上周四下午同事提了一个需求，想要监控app切换到后台和息屏的事件。原因是因为用户在使用app时大多数时候不会去主动关闭app，又因为我们的app和远程服务器有一个数据池的长连接，所以用户不主动退出就导致了连接数只增不减，最终down掉。所以他想在上述的两种事件中强制app退出。其实我有点怀疑服务器传输堵塞可能不是这个问题造成的，连接池都会有超时熔断的操作，应该不会有连接不收回的情况。但是他既然有">
+<meta name="description" content="上周四下午同事提了一个需求，想要监控app切换到后台和息屏的事件。原因是因为用户在使用app时大多数时候不会去主动关闭app，又因为我们的app和远程服务器有一个数据池的长连接，所以用户不主动退出就导致了连接数只增不减，最终down掉。所以他想在上述的两种事件中强制app退出。  其实我有点怀疑服务器传输堵塞可能不是这个问题造成的，连接池都会有超时熔断的操作，应该不会有连接不收回的情况。但是他">
 <meta name="keywords" content="Android小功能">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安卓实现切换后台监控">
 <meta property="og:url" content="https://yangchaofan.coding.me/2018/11/26/安卓实现切换后台监控/index.html">
 <meta property="og:site_name" content="时间一直在变">
-<meta property="og:description" content="上周四下午同事提了一个需求，想要监控app切换到后台和息屏的事件。原因是因为用户在使用app时大多数时候不会去主动关闭app，又因为我们的app和远程服务器有一个数据池的长连接，所以用户不主动退出就导致了连接数只增不减，最终down掉。所以他想在上述的两种事件中强制app退出。其实我有点怀疑服务器传输堵塞可能不是这个问题造成的，连接池都会有超时熔断的操作，应该不会有连接不收回的情况。但是他既然有">
+<meta property="og:description" content="上周四下午同事提了一个需求，想要监控app切换到后台和息屏的事件。原因是因为用户在使用app时大多数时候不会去主动关闭app，又因为我们的app和远程服务器有一个数据池的长连接，所以用户不主动退出就导致了连接数只增不减，最终down掉。所以他想在上述的两种事件中强制app退出。  其实我有点怀疑服务器传输堵塞可能不是这个问题造成的，连接池都会有超时熔断的操作，应该不会有连接不收回的情况。但是他">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-27T09:42:21.643Z">
+<meta property="og:updated_time" content="2018-11-29T02:02:44.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓实现切换后台监控">
-<meta name="twitter:description" content="上周四下午同事提了一个需求，想要监控app切换到后台和息屏的事件。原因是因为用户在使用app时大多数时候不会去主动关闭app，又因为我们的app和远程服务器有一个数据池的长连接，所以用户不主动退出就导致了连接数只增不减，最终down掉。所以他想在上述的两种事件中强制app退出。其实我有点怀疑服务器传输堵塞可能不是这个问题造成的，连接池都会有超时熔断的操作，应该不会有连接不收回的情况。但是他既然有">
+<meta name="twitter:description" content="上周四下午同事提了一个需求，想要监控app切换到后台和息屏的事件。原因是因为用户在使用app时大多数时候不会去主动关闭app，又因为我们的app和远程服务器有一个数据池的长连接，所以用户不主动退出就导致了连接数只增不减，最终down掉。所以他想在上述的两种事件中强制app退出。  其实我有点怀疑服务器传输堵塞可能不是这个问题造成的，连接池都会有超时熔断的操作，应该不会有连接不收回的情况。但是他">
 
 
 
@@ -382,6 +382,24 @@
           
 
           
+            <div class="post-wordcount">
+              
+
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3分钟
+                </span>
+              
+            </div>
+          
 
           
 
@@ -399,7 +417,10 @@
 
       
         <hr>
-<p>上周四下午同事提了一个需求，想要监控app切换到后台和息屏的事件。原因是因为用户在使用app时大多数时候不会去主动关闭app，又因为我们的app和远程服务器有一个数据池的长连接，所以用户不主动退出就导致了连接数只增不减，最终down掉。所以他想在上述的两种事件中强制app退出。<br>其实我有点怀疑服务器传输堵塞可能不是这个问题造成的，连接池都会有超时熔断的操作，应该不会有连接不收回的情况。但是他既然有这个需求，那就先试着实现吧。</p>
+<blockquote>
+<p>上周四下午同事提了一个需求，想要监控app切换到后台和息屏的事件。原因是因为用户在使用app时大多数时候不会去主动关闭app，又因为我们的app和远程服务器有一个数据池的长连接，所以用户不主动退出就导致了连接数只增不减，最终down掉。所以他想在上述的两种事件中强制app退出。</p>
+</blockquote>
+<p>其实我有点怀疑服务器传输堵塞可能不是这个问题造成的，连接池都会有超时熔断的操作，应该不会有连接不收回的情况。但是他既然有这个需求，那就先试着实现吧。</p>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>想要实现后台切换监控，第一个想到的就是从activity生命周期下手，对于Lifecycle大家应该都很熟悉了，从一个a到另一个a经历了几个过程呢？</p>
 <p>假设有两个页面 <strong>a</strong> 和 <strong>b</strong>。<br>有些人觉得跳转过程是下面这样：</p>
 <pre><code>展示a界面：a.onCreat -&gt; a.onStart -&gt; a.onResume
@@ -441,7 +462,7 @@
   <p><span>本文标题:</span><a href="/2018/11/26/安卓实现切换后台监控/">安卓实现切换后台监控</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年11月26日 - 17:29</p>
-  <p><span>最后更新:</span>2018年11月27日 - 17:42</p>
+  <p><span>最后更新:</span>2018年11月29日 - 10:02</p>
   <p><span>原始链接:</span><a href="/2018/11/26/安卓实现切换后台监控/" title="安卓实现切换后台监控">https://yangchaofan.coding.me/2018/11/26/安卓实现切换后台监控/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangchaofan.coding.me/2018/11/26/安卓实现切换后台监控/"  aria-label="复制成功！"></i></span>
   </p>

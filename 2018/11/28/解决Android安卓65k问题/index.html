@@ -82,20 +82,20 @@
 
 
 
-<meta name="description" content="给公司的老项目做开发可能都会见到这个问题：  出现这个问题的原因是由于在编译时，一个项目的class文件会被全部打包为一个classes.dex文件(玩过反编译的同学应该心有所感，哈哈)，它会为每个方法赋予一个id而这个id的范围在0~0xffff,所以一个app的方法数最多为65536个，超过这个数就会出现传说中的65k错误。 那如何解决呢？ Google官方已经给出了一个很好的解决方案，就是">
+<meta name="description" content="给公司的老项目做开发可能都会见到这个问题：   出现这个问题的原因是由于在编译时，一个项目的class文件会被全部打包为一个classes.dex文件(玩过反编译的同学应该心有所感，哈哈)，它会为每个方法赋予一个id而这个id的范围在0~0xffff,所以一个app的方法数最多为65536个，超过这个数就会出现传说中的65k错误。 那如何解决呢？ Google官方已经给出了一个很好的解决方案，">
 <meta name="keywords" content="Android异常">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决Android安卓65k问题">
 <meta property="og:url" content="https://yangchaofan.coding.me/2018/11/28/解决Android安卓65k问题/index.html">
 <meta property="og:site_name" content="时间一直在变">
-<meta property="og:description" content="给公司的老项目做开发可能都会见到这个问题：  出现这个问题的原因是由于在编译时，一个项目的class文件会被全部打包为一个classes.dex文件(玩过反编译的同学应该心有所感，哈哈)，它会为每个方法赋予一个id而这个id的范围在0~0xffff,所以一个app的方法数最多为65536个，超过这个数就会出现传说中的65k错误。 那如何解决呢？ Google官方已经给出了一个很好的解决方案，就是">
+<meta property="og:description" content="给公司的老项目做开发可能都会见到这个问题：   出现这个问题的原因是由于在编译时，一个项目的class文件会被全部打包为一个classes.dex文件(玩过反编译的同学应该心有所感，哈哈)，它会为每个方法赋予一个id而这个id的范围在0~0xffff,所以一个app的方法数最多为65536个，超过这个数就会出现传说中的65k错误。 那如何解决呢？ Google官方已经给出了一个很好的解决方案，">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/解决Android安卓65k问题/65k.jpg">
 <meta property="og:image" content="https://yangchaofan.coding.me/2018/11/28/解决Android安卓65k问题/ym.jpg">
-<meta property="og:updated_time" content="2018-11-28T13:17:54.540Z">
+<meta property="og:updated_time" content="2018-11-29T02:03:04.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决Android安卓65k问题">
-<meta name="twitter:description" content="给公司的老项目做开发可能都会见到这个问题：  出现这个问题的原因是由于在编译时，一个项目的class文件会被全部打包为一个classes.dex文件(玩过反编译的同学应该心有所感，哈哈)，它会为每个方法赋予一个id而这个id的范围在0~0xffff,所以一个app的方法数最多为65536个，超过这个数就会出现传说中的65k错误。 那如何解决呢？ Google官方已经给出了一个很好的解决方案，就是">
+<meta name="twitter:description" content="给公司的老项目做开发可能都会见到这个问题：   出现这个问题的原因是由于在编译时，一个项目的class文件会被全部打包为一个classes.dex文件(玩过反编译的同学应该心有所感，哈哈)，它会为每个方法赋予一个id而这个id的范围在0~0xffff,所以一个app的方法数最多为65536个，超过这个数就会出现传说中的65k错误。 那如何解决呢？ Google官方已经给出了一个很好的解决方案，">
 <meta name="twitter:image" content="https://yangchaofan.coding.me/2018/11/28/解决Android安卓65k问题/65k.jpg">
 
 
@@ -385,6 +385,24 @@
           
 
           
+            <div class="post-wordcount">
+              
+
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1分钟
+                </span>
+              
+            </div>
+          
 
           
 
@@ -402,7 +420,9 @@
 
       
         <hr>
+<blockquote>
 <p>给公司的老项目做开发可能都会见到这个问题：</p>
+</blockquote>
 <p><img src="/2018/11/28/解决Android安卓65k问题/65k.jpg" alt="65k"></p>
 <p>出现这个问题的原因是由于在编译时，一个项目的<code>class</code>文件会被全部打包为一个<code>classes.dex</code>文件(玩过反编译的同学应该心有所感，哈哈)，它会为每个方法赋予一个<code>id</code>而这个<code>id</code>的范围在<code>0~0xffff</code>,所以一个app的方法数最多为<code>65536</code>个，超过这个数就会出现传说中的65k错误。</p>
 <p>那如何解决呢？</p>
@@ -444,7 +464,7 @@
   <p><span>本文标题:</span><a href="/2018/11/28/解决Android安卓65k问题/">解决Android安卓65k问题</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年11月28日 - 13:34</p>
-  <p><span>最后更新:</span>2018年11月28日 - 21:17</p>
+  <p><span>最后更新:</span>2018年11月29日 - 10:03</p>
   <p><span>原始链接:</span><a href="/2018/11/28/解决Android安卓65k问题/" title="解决Android安卓65k问题">https://yangchaofan.coding.me/2018/11/28/解决Android安卓65k问题/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangchaofan.coding.me/2018/11/28/解决Android安卓65k问题/"  aria-label="复制成功！"></i></span>
   </p>
