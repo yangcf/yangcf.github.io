@@ -82,20 +82,20 @@
 
 
 
-<meta name="description" content="Java内存组成：堆(Heap)和非堆(Non-heap)内存 官方说法：“Java 虚拟机具有一个堆，堆是运行时数据区域，所有类实例和数组的内存均从此处分配。堆是在 Java 虚拟机启动时创建的。在JVM中堆之外的内存称为非堆内存(Non-heap memory)”。  可以看出JVM主要管理两种类型的内存：堆和非堆。简单来说堆就是Java代码可及的内存，是留给开发人员使用的；非堆就是JVM留">
+<meta name="description" content="一、Java内存组成：堆(Heap)和非堆(Non-heap)内存 官方说法：“Java 虚拟机具有一个堆，堆是运行时数据区域，所有类实例和数组的内存均从此处分配。堆是在 Java 虚拟机启动时创建的。在JVM中堆之外的内存称为非堆内存(Non-heap memory)”。  可以看出JVM主要管理两种类型的内存：堆和非堆。简单来说堆就是Java代码可及的内存，是留给开发人员使用的；非堆就是JV">
 <meta name="keywords" content="JVM,java学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java虚拟机的内存组成以及堆内存介绍">
 <meta property="og:url" content="https://yangchaofan.coding.me/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/index.html">
 <meta property="og:site_name" content="时间一直在变">
-<meta property="og:description" content="Java内存组成：堆(Heap)和非堆(Non-heap)内存 官方说法：“Java 虚拟机具有一个堆，堆是运行时数据区域，所有类实例和数组的内存均从此处分配。堆是在 Java 虚拟机启动时创建的。在JVM中堆之外的内存称为非堆内存(Non-heap memory)”。  可以看出JVM主要管理两种类型的内存：堆和非堆。简单来说堆就是Java代码可及的内存，是留给开发人员使用的；非堆就是JVM留">
+<meta property="og:description" content="一、Java内存组成：堆(Heap)和非堆(Non-heap)内存 官方说法：“Java 虚拟机具有一个堆，堆是运行时数据区域，所有类实例和数组的内存均从此处分配。堆是在 Java 虚拟机启动时创建的。在JVM中堆之外的内存称为非堆内存(Non-heap memory)”。  可以看出JVM主要管理两种类型的内存：堆和非堆。简单来说堆就是Java代码可及的内存，是留给开发人员使用的；非堆就是JV">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://yangchaofan.coding.me/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/JVM内存区域模型.jpg">
 <meta property="og:image" content="https://yangchaofan.coding.me/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/heap.jpg">
-<meta property="og:updated_time" content="2018-11-29T13:23:26.765Z">
+<meta property="og:updated_time" content="2018-11-29T13:27:59.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机的内存组成以及堆内存介绍">
-<meta name="twitter:description" content="Java内存组成：堆(Heap)和非堆(Non-heap)内存 官方说法：“Java 虚拟机具有一个堆，堆是运行时数据区域，所有类实例和数组的内存均从此处分配。堆是在 Java 虚拟机启动时创建的。在JVM中堆之外的内存称为非堆内存(Non-heap memory)”。  可以看出JVM主要管理两种类型的内存：堆和非堆。简单来说堆就是Java代码可及的内存，是留给开发人员使用的；非堆就是JVM留">
+<meta name="twitter:description" content="一、Java内存组成：堆(Heap)和非堆(Non-heap)内存 官方说法：“Java 虚拟机具有一个堆，堆是运行时数据区域，所有类实例和数组的内存均从此处分配。堆是在 Java 虚拟机启动时创建的。在JVM中堆之外的内存称为非堆内存(Non-heap memory)”。  可以看出JVM主要管理两种类型的内存：堆和非堆。简单来说堆就是Java代码可及的内存，是留给开发人员使用的；非堆就是JV">
 <meta name="twitter:image" content="https://yangchaofan.coding.me/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/JVM内存区域模型.jpg">
 
 
@@ -430,17 +430,17 @@
 
       
         <hr>
-<h1 id="Java内存组成：堆-Heap-和非堆-Non-heap-内存"><a href="#Java内存组成：堆-Heap-和非堆-Non-heap-内存" class="headerlink" title="Java内存组成：堆(Heap)和非堆(Non-heap)内存"></a>Java内存组成：堆(Heap)和非堆(Non-heap)内存</h1><blockquote>
+<h1 id="一、Java内存组成：堆-Heap-和非堆-Non-heap-内存"><a href="#一、Java内存组成：堆-Heap-和非堆-Non-heap-内存" class="headerlink" title="一、Java内存组成：堆(Heap)和非堆(Non-heap)内存"></a>一、Java内存组成：堆(Heap)和非堆(Non-heap)内存</h1><blockquote>
 <p>官方说法：“Java 虚拟机具有一个堆，堆是运行时数据区域，所有<code>类实例和数组</code>的内存均从此处分配。堆是在 Java 虚拟机启动时创建的。在JVM中堆之外的内存称为非堆内存(Non-heap memory)”。</p>
 </blockquote>
 <p>可以看出JVM主要管理两种类型的内存：堆和非堆。简单来说堆就是Java代码可及的内存，是留给开发人员使用的；非堆就是JVM留给 自己用的，所以<code>方法区、JVM内部处理或优化所需的内存</code>(如JIT编译后的代码缓存)、每个类结构(如运行时常数池、字段和方法数据)以及<code>方法和构造方法</code>的代码都在<code>非堆内存</code>中。</p>
-<h1 id="JVM内存区域模型"><a href="#JVM内存区域模型" class="headerlink" title="JVM内存区域模型"></a>JVM内存区域模型</h1><p><img src="/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/JVM内存区域模型.jpg" alt="JVM内存区域模型"></p>
-<h2 id="方法区-Method-Area-线程共享"><a href="#方法区-Method-Area-线程共享" class="headerlink" title="方法区(Method Area) 线程共享"></a>方法区(Method Area) <code>线程共享</code></h2><p>方法区也叫做“永久代”、“非堆”（应该只是非堆中的一项），<br>它用于存储虚拟机加载的类信息、常量、静态变量、是各个线程共享的内存区域。默认最小值为16MB，最大值为64MB，可以通过<code>-XX:PermSize</code>和<code>-XX:MaxPermSize</code>参数限制方法区的大小。</p>
+<h1 id="二、JVM内存区域模型"><a href="#二、JVM内存区域模型" class="headerlink" title="二、JVM内存区域模型"></a>二、JVM内存区域模型</h1><p><img src="/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/JVM内存区域模型.jpg" alt="JVM内存区域模型"></p>
+<h2 id="1-方法区-Method-Area-线程共享"><a href="#1-方法区-Method-Area-线程共享" class="headerlink" title="1.方法区(Method Area) 线程共享"></a>1.方法区(Method Area) <code>线程共享</code></h2><p>方法区也叫做“永久代”、“非堆”（应该只是非堆中的一项），<br>它用于存储虚拟机加载的类信息、常量、静态变量、是各个线程共享的内存区域。默认最小值为16MB，最大值为64MB，可以通过<code>-XX:PermSize</code>和<code>-XX:MaxPermSize</code>参数限制方法区的大小。</p>
 <p>运行时常量池(<code>Runtime Constant Pool</code>)：是方法区的一部分，其中的主要内容来自于<code>JVM</code>对<code>Class</code>的加载。（<code>Class</code>文件中除了有类的版本、字段、方法、接口等描述信息外，还有一项信息是<code>常量池</code>，用于存放编译器生成的各种符号引用，这部分内容将在<code>类加载后</code>放到方法区的运行时常量池中。）</p>
-<h2 id="虚拟机栈-Jvm-Stack-线程私有"><a href="#虚拟机栈-Jvm-Stack-线程私有" class="headerlink" title="虚拟机栈(Jvm Stack) 线程私有"></a>虚拟机栈(Jvm Stack) <code>线程私有</code></h2><p>每个方法被执行的时候 都会创建一个“栈帧”用于存储局部变量表(包括参数)、操作栈、方法出口等信息。<code>每个方法被调用到执行完的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</code>声明周期与线程相同，是线程私有的。</p>
+<h2 id="2-虚拟机栈-Jvm-Stack-线程私有"><a href="#2-虚拟机栈-Jvm-Stack-线程私有" class="headerlink" title="2.虚拟机栈(Jvm Stack) 线程私有"></a>2.虚拟机栈(Jvm Stack) <code>线程私有</code></h2><p>每个方法被执行的时候 都会创建一个“栈帧”用于存储局部变量表(包括参数)、操作栈、方法出口等信息。<code>每个方法被调用到执行完的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</code>声明周期与线程相同，是线程私有的。</p>
 <p>局部变量表存放了编译器可知的各种<code>基本数据类型</code>(boolean、byte、char、short、int、float、long、double)、<code>对象引用</code>(引用指针，并非对象本身)，其中64位长度的<code>long</code>和<code>double</code>类型的数据会占用<code>2</code>个局部变量的空间，其余数据类型只占<code>1</code>个。局部变量表所需的内存空间在编译期间完成分配，当进入一个方法时，这个方法需要在栈帧中分配多大的局部变量是完全确定的，在运行期间栈帧<code>不会</code>改变局部变量表的大小空间。</p>
-<h2 id="本地方法栈-Native-Method-Stack-线程私有"><a href="#本地方法栈-Native-Method-Stack-线程私有" class="headerlink" title="本地方法栈(Native Method Stack) 线程私有"></a>本地方法栈(Native Method Stack) <code>线程私有</code></h2><p>与虚拟机栈基本类似，区别在于虚拟机栈为虚拟机执行的<code>java</code>方法服务，而本地方法栈则是为<code>Native</code>方法服务。</p>
-<h2 id="堆-Heap-线程共享"><a href="#堆-Heap-线程共享" class="headerlink" title="堆(Heap) 线程共享"></a>堆(Heap) <code>线程共享</code></h2><p>也叫做<code>java堆</code>、<code>GC堆</code>是<code>java</code>虚拟机所管理的内存中最大的一块内存区域，也是被各个线程共享的内存区域，在<code>JVM</code>启动时创建，我们常说的JVM优化也多从这里入手。</p>
+<h2 id="3-本地方法栈-Native-Method-Stack-线程私有"><a href="#3-本地方法栈-Native-Method-Stack-线程私有" class="headerlink" title="3.本地方法栈(Native Method Stack) 线程私有"></a>3.本地方法栈(Native Method Stack) <code>线程私有</code></h2><p>与虚拟机栈基本类似，区别在于虚拟机栈为虚拟机执行的<code>java</code>方法服务，而本地方法栈则是为<code>Native</code>方法服务。</p>
+<h2 id="4-堆-Heap-线程共享"><a href="#4-堆-Heap-线程共享" class="headerlink" title="4.堆(Heap) 线程共享"></a>4.堆(Heap) <code>线程共享</code></h2><p>也叫做<code>java堆</code>、<code>GC堆</code>是<code>java</code>虚拟机所管理的内存中最大的一块内存区域，也是被各个线程共享的内存区域，在<code>JVM</code>启动时创建，我们常说的JVM优化也多从这里入手。</p>
 <p>该内存区域存放了对象实例及数组(所有new的对象)。其大小通过<code>-Xms</code>(最小值)和<code>-Xmx</code>(最大值)参数设置，<code>-Xms</code>为<code>JVM</code>启动时申请的最小内存，默认为操作系统物理内存的1/64但小于1G，<code>-Xmx</code>为<code>JVM</code>可申请的最大内存，默认为物理内存的1/4但小于1G，默认当空余堆内存小于<code>40%</code>时，<code>JVM</code>会增大<code>Heap</code>到<code>-Xmx</code>指定的大小，可通过<code>-XX:MinHeapFreeRation=</code>来指定这个比列；当空余堆内存大于<code>70%</code>时，<code>JVM</code>会减小<code>heap</code>的大小到<code>-Xms</code>指定的大小，可通过<code>XX:MaxHeapFreeRation=</code>来指定这个比列，对于运行系统，为避免在运行时频繁调整<code>Heap</code>的大小，通常<code>-Xms</code>与-<code>Xmx</code>的值设成一样。</p>
 <p>由于现在收集器都是采用<code>分代收集算法</code>，堆被划分为<code>新生代</code>和<code>老年代</code>。<code>新生代</code>主要存储新创建的对象和尚未进入老年代的对象。<code>老年代</code>存储经过多次新生代GC(Minor GC)任然存活的对象。</p>
 <p>我在另一篇<a href="">博文</a>中会单独介绍各种收集算法。</p>
@@ -451,9 +451,9 @@
 <li><code>大对象</code>，可通过启动参数设置<code>-XX:PretenureSizeThreshold=1024</code>(单位为字节，默认为0)来代表超过多大时就不在新生代分配，而是直接在老年代分配。</li>
 <li><code>大的数组对象</code>，且数组中<code>无引用外部对象</code>。 老年代所占的内存大小为<code>-Xmx</code>对应的值减去<code>-Xmn</code>对应的值。</li>
 </ul>
-<h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><p>是最小的一块内存区域，它的作用是当前线程所执行的字节码的行号指示器，在虚拟机的模型里，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、异常处理、线程恢复等基础功能都需要依赖计数器完成。</p>
-<h1 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h1><p>直接内存并不是虚拟机内存的一部分，也不是<code>Java</code>虚拟机规范中定义的内存区域。<code>jdk1.4</code>中新加入的<code>NIO</code>，引入了通道与缓冲区的<code>IO</code>方式，它可以调用<code>Native</code>方法直接分配堆外内存，这个堆外内存就是本机内存(直接内存)，不会影响到堆内存的大小。这块内存被许多框架用来做高速缓存。</p>
-<h1 id="Java堆内存的10个要点"><a href="#Java堆内存的10个要点" class="headerlink" title="Java堆内存的10个要点"></a>Java堆内存的10个要点</h1><blockquote>
+<h2 id="5-程序计数器"><a href="#5-程序计数器" class="headerlink" title="5.程序计数器"></a>5.程序计数器</h2><p>是最小的一块内存区域，它的作用是当前线程所执行的字节码的行号指示器，在虚拟机的模型里，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、异常处理、线程恢复等基础功能都需要依赖计数器完成。</p>
+<h1 id="三、直接内存"><a href="#三、直接内存" class="headerlink" title="三、直接内存"></a>三、直接内存</h1><p>直接内存并不是虚拟机内存的一部分，也不是<code>Java</code>虚拟机规范中定义的内存区域。<code>jdk1.4</code>中新加入的<code>NIO</code>，引入了通道与缓冲区的<code>IO</code>方式，它可以调用<code>Native</code>方法直接分配堆外内存，这个堆外内存就是本机内存(直接内存)，不会影响到堆内存的大小。这块内存被许多框架用来做高速缓存。</p>
+<h1 id="四、Java堆内存的10个要点"><a href="#四、Java堆内存的10个要点" class="headerlink" title="四、Java堆内存的10个要点"></a>四、Java堆内存的10个要点</h1><blockquote>
 <p>Java堆(Heap)比较重要，我们单独拿出来再说一说。</p>
 </blockquote>
 <ol>
@@ -508,7 +508,7 @@
   <p><span>本文标题:</span><a href="/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/">Java虚拟机的内存组成以及堆内存介绍</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年11月29日 - 20:12</p>
-  <p><span>最后更新:</span>2018年11月29日 - 21:23</p>
+  <p><span>最后更新:</span>2018年11月29日 - 21:27</p>
   <p><span>原始链接:</span><a href="/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/" title="Java虚拟机的内存组成以及堆内存介绍">https://yangchaofan.coding.me/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangchaofan.coding.me/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/"  aria-label="复制成功！"></i></span>
   </p>
@@ -753,7 +753,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java内存组成：堆-Heap-和非堆-Non-heap-内存"><span class="nav-number">1.</span> <span class="nav-text">Java内存组成：堆(Heap)和非堆(Non-heap)内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM内存区域模型"><span class="nav-number">2.</span> <span class="nav-text">JVM内存区域模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法区-Method-Area-线程共享"><span class="nav-number">2.1.</span> <span class="nav-text">方法区(Method Area) 线程共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机栈-Jvm-Stack-线程私有"><span class="nav-number">2.2.</span> <span class="nav-text">虚拟机栈(Jvm Stack) 线程私有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地方法栈-Native-Method-Stack-线程私有"><span class="nav-number">2.3.</span> <span class="nav-text">本地方法栈(Native Method Stack) 线程私有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆-Heap-线程共享"><span class="nav-number">2.4.</span> <span class="nav-text">堆(Heap) 线程共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新生代："><span class="nav-number">2.4.1.</span> <span class="nav-text">新生代：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#老年代："><span class="nav-number">2.4.2.</span> <span class="nav-text">老年代：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序计数器"><span class="nav-number">2.5.</span> <span class="nav-text">程序计数器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#直接内存"><span class="nav-number">3.</span> <span class="nav-text">直接内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java堆内存的10个要点"><span class="nav-number">4.</span> <span class="nav-text">Java堆内存的10个要点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、Java内存组成：堆-Heap-和非堆-Non-heap-内存"><span class="nav-number">1.</span> <span class="nav-text">一、Java内存组成：堆(Heap)和非堆(Non-heap)内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、JVM内存区域模型"><span class="nav-number">2.</span> <span class="nav-text">二、JVM内存区域模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-方法区-Method-Area-线程共享"><span class="nav-number">2.1.</span> <span class="nav-text">1.方法区(Method Area) 线程共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-虚拟机栈-Jvm-Stack-线程私有"><span class="nav-number">2.2.</span> <span class="nav-text">2.虚拟机栈(Jvm Stack) 线程私有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-本地方法栈-Native-Method-Stack-线程私有"><span class="nav-number">2.3.</span> <span class="nav-text">3.本地方法栈(Native Method Stack) 线程私有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-堆-Heap-线程共享"><span class="nav-number">2.4.</span> <span class="nav-text">4.堆(Heap) 线程共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新生代："><span class="nav-number">2.4.1.</span> <span class="nav-text">新生代：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#老年代："><span class="nav-number">2.4.2.</span> <span class="nav-text">老年代：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-程序计数器"><span class="nav-number">2.5.</span> <span class="nav-text">5.程序计数器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、直接内存"><span class="nav-number">3.</span> <span class="nav-text">三、直接内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、Java堆内存的10个要点"><span class="nav-number">4.</span> <span class="nav-text">四、Java堆内存的10个要点</span></a></li></ol></div>
             
 
           </div>
