@@ -2117,7 +2117,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #85ff0a;
+  background: #06a183;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3133,7 +3133,8 @@ div.vedit {
   font-weight: 400 !important;
 }
 .v {
-  background-color: #faf9de;
+  background-color: #dce2f1;
+  border-radius: 3px !important;
   padding: 10px;
 }
 .vsubmit {
