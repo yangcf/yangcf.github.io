@@ -1240,7 +1240,7 @@ pre .javascript .function {
   background: url("../images/header_bg.jpg") no-repeat;
   background-size: 100%;
   width: 100%;
-  height: 100%;
+  height: 80%;
   margin: 0;
   padding: 0;
   position: absolute;
@@ -2140,7 +2140,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ebf6f7;
+  background: #0e345b;
 }
 .links-of-blogroll {
   font-size: 13px;
