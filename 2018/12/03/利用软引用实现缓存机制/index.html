@@ -82,19 +82,19 @@
 
 
 
-<meta name="description" content="首先，我们需要对java对象的4中引用有一个大概的认识。  java对象的引用包括强引用，软引用，弱引用，虚引用  顾名思义，他们表示对象的引用强度依次递减。 他们有什么作用？最重要的目的就是方便gc进行回收。我们都知道，java的一大特点就是开发者不用关心内存的使用，jvm会帮助我们自动回收无用的内存空间(对象),而哪些对象需要回收就是通过引用来作为一种判断依据。 一、四种引用1.强引用通常我">
+<meta name="description" content="首先，我们需要对java对象的4种引用有一个大概的认识。  java对象的引用包括强引用，软引用，弱引用，虚引用  顾名思义，他们表示对象的引用强度依次递减。 他们有什么作用？最重要的目的就是方便gc进行回收。我们都知道，java的一大特点就是开发者不用关心内存的使用，jvm会帮助我们自动回收无用的内存空间(对象),而哪些对象需要回收就是通过引用来作为一种判断依据。 一、四种引用1.强引用通常我">
 <meta name="keywords" content="java学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用软引用实现缓存机制">
 <meta property="og:url" content="https://yangchaofan.coding.me/2018/12/03/利用软引用实现缓存机制/index.html">
 <meta property="og:site_name" content="时间一直在变">
-<meta property="og:description" content="首先，我们需要对java对象的4中引用有一个大概的认识。  java对象的引用包括强引用，软引用，弱引用，虚引用  顾名思义，他们表示对象的引用强度依次递减。 他们有什么作用？最重要的目的就是方便gc进行回收。我们都知道，java的一大特点就是开发者不用关心内存的使用，jvm会帮助我们自动回收无用的内存空间(对象),而哪些对象需要回收就是通过引用来作为一种判断依据。 一、四种引用1.强引用通常我">
+<meta property="og:description" content="首先，我们需要对java对象的4种引用有一个大概的认识。  java对象的引用包括强引用，软引用，弱引用，虚引用  顾名思义，他们表示对象的引用强度依次递减。 他们有什么作用？最重要的目的就是方便gc进行回收。我们都知道，java的一大特点就是开发者不用关心内存的使用，jvm会帮助我们自动回收无用的内存空间(对象),而哪些对象需要回收就是通过引用来作为一种判断依据。 一、四种引用1.强引用通常我">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543828331358&di=1efc779c20c8a1a1226d5da789010789&imgtype=0&src=http%3A%2F%2Fpic29.photophoto.cn%2F20131021%2F0037037582708103_b.jpg">
-<meta property="og:updated_time" content="2018-12-03T08:55:49.351Z">
+<meta property="og:updated_time" content="2018-12-04T01:39:22.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用软引用实现缓存机制">
-<meta name="twitter:description" content="首先，我们需要对java对象的4中引用有一个大概的认识。  java对象的引用包括强引用，软引用，弱引用，虚引用  顾名思义，他们表示对象的引用强度依次递减。 他们有什么作用？最重要的目的就是方便gc进行回收。我们都知道，java的一大特点就是开发者不用关心内存的使用，jvm会帮助我们自动回收无用的内存空间(对象),而哪些对象需要回收就是通过引用来作为一种判断依据。 一、四种引用1.强引用通常我">
+<meta name="twitter:description" content="首先，我们需要对java对象的4种引用有一个大概的认识。  java对象的引用包括强引用，软引用，弱引用，虚引用  顾名思义，他们表示对象的引用强度依次递减。 他们有什么作用？最重要的目的就是方便gc进行回收。我们都知道，java的一大特点就是开发者不用关心内存的使用，jvm会帮助我们自动回收无用的内存空间(对象),而哪些对象需要回收就是通过引用来作为一种判断依据。 一、四种引用1.强引用通常我">
 <meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543828331358&di=1efc779c20c8a1a1226d5da789010789&imgtype=0&src=http%3A%2F%2Fpic29.photophoto.cn%2F20131021%2F0037037582708103_b.jpg">
 
 
@@ -431,7 +431,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543828331358&di=1efc779c20c8a1a1226d5da789010789&imgtype=0&src=http%3A%2F%2Fpic29.photophoto.cn%2F20131021%2F0037037582708103_b.jpg" rel="gallery_cjp837g3w001l3sv24fxmrbn8"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543828331358&di=1efc779c20c8a1a1226d5da789010789&imgtype=0&src=http%3A%2F%2Fpic29.photophoto.cn%2F20131021%2F0037037582708103_b.jpg" rel="gallery_cjp9h7rmo000qb8v2rlfamk3y"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543828331358&di=1efc779c20c8a1a1226d5da789010789&imgtype=0&src=http%3A%2F%2Fpic29.photophoto.cn%2F20131021%2F0037037582708103_b.jpg" itemprop="contentUrl"/>
               </a>
@@ -445,7 +445,7 @@
 
       
         <hr>
-<p>首先，我们需要对java对象的4中引用有一个大概的认识。</p>
+<p>首先，我们需要对java对象的4种引用有一个大概的认识。</p>
 <blockquote>
 <p>java对象的引用包括<code>强引用</code>，<code>软引用</code>，<code>弱引用</code>，<code>虚引用</code></p>
 </blockquote>
@@ -493,7 +493,7 @@
   <p><span>本文标题:</span><a href="/2018/12/03/利用软引用实现缓存机制/">利用软引用实现缓存机制</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年12月03日 - 14:11</p>
-  <p><span>最后更新:</span>2018年12月03日 - 16:55</p>
+  <p><span>最后更新:</span>2018年12月04日 - 09:39</p>
   <p><span>原始链接:</span><a href="/2018/12/03/利用软引用实现缓存机制/" title="利用软引用实现缓存机制">https://yangchaofan.coding.me/2018/12/03/利用软引用实现缓存机制/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangchaofan.coding.me/2018/12/03/利用软引用实现缓存机制/"  aria-label="复制成功！"></i></span>
   </p>
@@ -789,7 +789,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共11.5k字</span>
+  <span class="post-count">博客全站共13.2k字</span>
 </div>
 
         
