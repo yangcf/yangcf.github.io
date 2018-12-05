@@ -86,7 +86,7 @@
 <meta name="keywords" content="java学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java内存模型和java对象模型">
-<meta property="og:url" content="https://yangchaofan.coding.me/2018/11/29/java内存模型和java对象模型/index.html">
+<meta property="og:url" content="https://yangcf.github.io/2018/11/29/java内存模型和java对象模型/index.html">
 <meta property="og:site_name" content="时间一直在变">
 <meta property="og:description" content="一定要分清内存模型和对象模型。他们是完全不同的概念。  内存模型Java内存模型看上去和Java内存结构（JVM内存结构）差不多，很多人会误以为两者是一回事儿，这也就导致面试过程中经常答非所为。 在前面一篇博文关于JVM内存结构的图中，我们可以看到，其中Java堆和方法区的区域是多个线程共享的数据区域。也就是说，多个线程可能可以操作保存在堆或者方法区中的同一个数据。这也就是我们常说的“Java">
 <meta property="og:locale" content="zh-Hans">
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="https://yangchaofan.coding.me/2018/11/29/java内存模型和java对象模型/"/>
+  <link rel="canonical" href="https://yangcf.github.io/2018/11/29/java内存模型和java对象模型/"/>
 
 
 
@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yangchaofan.coding.me/2018/11/29/java内存模型和java对象模型/">
+    <link itemprop="mainEntityOfPage" href="https://yangcf.github.io/2018/11/29/java内存模型和java对象模型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="饭饭君~">
@@ -431,7 +431,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1543634274&di=47ab12e3c54de8fced5b0d3fc096dd7b&src=http://media.tadu.com/2018/09/18/f/8/4/b/f84bdbd098194a82a528a14ea367aa41.jpg" rel="gallery_cjp9h7rmm000ob8v2rqye90zb"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1543634274&di=47ab12e3c54de8fced5b0d3fc096dd7b&src=http://media.tadu.com/2018/09/18/f/8/4/b/f84bdbd098194a82a528a14ea367aa41.jpg" rel="gallery_cjpak4hhi000kjgv23jnwfowt"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1543634274&di=47ab12e3c54de8fced5b0d3fc096dd7b&src=http://media.tadu.com/2018/09/18/f/8/4/b/f84bdbd098194a82a528a14ea367aa41.jpg" itemprop="contentUrl"/>
               </a>
@@ -449,9 +449,9 @@
 <p>一定要分清<code>内存模型</code>和<code>对象模型</code>。他们是完全不同的概念。</p>
 </blockquote>
 <h1 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h1><p><img src="/2018/11/29/java内存模型和java对象模型/内存模型.png" alt="内存模型"><br>Java内存模型看上去和Java内存结构（JVM内存结构）差不多，很多人会误以为两者是一回事儿，这也就导致面试过程中经常答非所为。</p>
-<p>在前面一篇<a href="https://yangchaofan.coding.me/2018/11/29/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%84%E6%88%90%E4%BB%A5%E5%8F%8A%E5%A0%86%E5%86%85%E5%AD%98%E4%BB%8B%E7%BB%8D/">博文</a>关于JVM内存结构的图中，我们可以看到，其中Java堆和方法区的区域是多个线程共享的数据区域。也就是说，多个线程可能可以操作保存在堆或者方法区中的同一个数据。这也就是我们常说的“Java的线程间通过共享内存进行通信”。</p>
+<p>在前面一篇<a href="https://yangchaofan.coding.me/2018/11/29/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%84%E6%88%90%E4%BB%A5%E5%8F%8A%E5%A0%86%E5%86%85%E5%AD%98%E4%BB%8B%E7%BB%8D/" target="_blank" rel="noopener">博文</a>关于JVM内存结构的图中，我们可以看到，其中Java堆和方法区的区域是多个线程共享的数据区域。也就是说，多个线程可能可以操作保存在堆或者方法区中的同一个数据。这也就是我们常说的“Java的线程间通过共享内存进行通信”。</p>
 <p>Java内存模型是根据英文<code>Java Memory Model</code>（JMM）翻译过来的。其实JMM并不像JVM内存结构一样是真实存在的。他只是一个<code>抽象的概念</code>。<a href="http://www.cs.umd.edu/~pugh/java/memoryModel/jsr133.pdf" target="_blank" rel="noopener">JSR-133: Java Memory Model and Thread Specification</a>中描述了，JMM是和多线程相关的，他描述了一组规则或规范，这个规范定义了一个线程对共享变量的写入时对另一个线程是可见的。</p>
-<p>那么，简单总结下，Java的多线程之间是通过共享内存进行通信的，而由于采用共享内存进行通信，在通信过程中会存在一系列如可见性、原子性、顺序性等问题，而JMM就是围绕着多线程通信以及与其相关的一系列特性而建立的模型。JMM定义了一些语法集，这些语法集映射到Java语言中就是<a href="https://yangchaofan.coding.me/2018/03/30/%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E5%8F%AF%E8%A7%81%E6%80%A7%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/#more"><code>volatile</code>、<code>synchronized</code></a>等关键字。</p>
+<p>那么，简单总结下，Java的多线程之间是通过共享内存进行通信的，而由于采用共享内存进行通信，在通信过程中会存在一系列如可见性、原子性、顺序性等问题，而JMM就是围绕着多线程通信以及与其相关的一系列特性而建立的模型。JMM定义了一些语法集，这些语法集映射到Java语言中就是<a href="https://yangchaofan.coding.me/2018/03/30/%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E5%8F%AF%E8%A7%81%E6%80%A7%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/#more" target="_blank" rel="noopener"><code>volatile</code>、<code>synchronized</code></a>等关键字。</p>
 <h1 id="对象模型"><a href="#对象模型" class="headerlink" title="对象模型"></a>对象模型</h1><p>Java是一种面向对象的语言，而Java对象在JVM中的存储也是有一定的结构的。而这个关于Java对象自身的存储模型称之为Java对象模型。</p>
 <p><img src="/2018/11/29/java内存模型和java对象模型/对象模型.png" alt="对象模型"></p>
 <p>HotSpot虚拟机中，设计了一个OOP-Klass Model。</p>
@@ -488,8 +488,8 @@
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年11月29日 - 22:09</p>
   <p><span>最后更新:</span>2018年12月01日 - 11:18</p>
-  <p><span>原始链接:</span><a href="/2018/11/29/java内存模型和java对象模型/" title="java内存模型和java对象模型">https://yangchaofan.coding.me/2018/11/29/java内存模型和java对象模型/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangchaofan.coding.me/2018/11/29/java内存模型和java对象模型/"  aria-label="复制成功！"></i></span>
+  <p><span>原始链接:</span><a href="/2018/11/29/java内存模型和java对象模型/" title="java内存模型和java对象模型">https://yangcf.github.io/2018/11/29/java内存模型和java对象模型/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangcf.github.io/2018/11/29/java内存模型和java对象模型/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
