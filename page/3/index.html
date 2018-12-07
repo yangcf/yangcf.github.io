@@ -332,7 +332,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yangcf.github.io/2018/11/28/解决Android安卓65k问题/">
+    <link itemprop="mainEntityOfPage" href="https://yangcf.github.io/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="饭饭君~">
@@ -351,7 +351,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/28/解决Android安卓65k问题/" itemprop="url">解决Android安卓65k问题</a></h1>
+                <a class="post-title-link" href="/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/" itemprop="url">Java虚拟机的内存组成以及堆内存介绍</a></h1>
         
 
         <div class="post-meta">
@@ -363,8 +363,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-28T13:34:37+08:00">
-                2018-11-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-29T20:12:24+08:00">
+                2018-11-29
               </time>
             
 
@@ -386,8 +386,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -404,8 +404,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/28/解决Android安卓65k问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/28/解决Android安卓65k问题/" itemprop="commentCount"></span>
+                <a href="/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -413,7 +413,7 @@
 
           
           
-             <span id="/2018/11/28/解决Android安卓65k问题/" class="leancloud_visitors" data-flag-title="解决Android安卓65k问题">
+             <span id="/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/" class="leancloud_visitors" data-flag-title="Java虚拟机的内存组成以及堆内存介绍">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -441,7 +441,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1分钟
+                  6分钟
                 </span>
               
             </div>
@@ -465,9 +465,9 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543644643405&di=1f7babb154f4d7c7ccee3c94bccef820&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F56cfb340669132f46dbf7a789b41eca1833dc81d.jpg" rel="gallery_cjpat8a1w001ac0v2lvj2uab9"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1543634274&di=9fa65c853a4285582ff0855c10fb3b97&src=http://img.zcool.cn/community/01ff655562b7ca0000009c50030516.jpg@1280w_1l_2o_100sh.jpg" rel="gallery_cjpdenc0p0006iwv26d29l4nn"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543644643405&di=1f7babb154f4d7c7ccee3c94bccef820&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F56cfb340669132f46dbf7a789b41eca1833dc81d.jpg" itemprop="contentUrl"/>
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1543634274&di=9fa65c853a4285582ff0855c10fb3b97&src=http://img.zcool.cn/community/01ff655562b7ca0000009c50030516.jpg@1280w_1l_2o_100sh.jpg" itemprop="contentUrl"/>
               </a>
             
           
@@ -481,15 +481,12 @@
         
           
           
-
-给公司的老项目做开发可能都会见到这个问题：
-
-
-出现这个问题的原因是由于在编译时，一个项目的class文件会被全部打包为一个classes.dex文件(玩过反编译的同学应该心有所感，哈哈)，它会为
+一、Java内存组成：堆(Heap)和非堆(Non-heap)内存
+官方说法：“Java 虚拟机具有一个堆，堆是运行时数据区域，所有类实例和数组的内存均从此处分配。堆是在 Java 虚拟机启动时创建
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/11/28/解决Android安卓65k问题/#more" rel="contents">
+            <a class="btn" href="/2018/11/29/Java虚拟机的内存组成以及堆内存介绍/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -680,7 +677,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1543634444&di=bf68d68ed67652aa0d59eaa9822b7ae0&src=http://img.mp.itc.cn/upload/20161201/944e4cc452f8431fbbbc5d02c7f8e91f_th.jpeg" rel="gallery_cjpat8a1l0013c0v2jt7g7mg3"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1543634444&di=bf68d68ed67652aa0d59eaa9822b7ae0&src=http://img.mp.itc.cn/upload/20161201/944e4cc452f8431fbbbc5d02c7f8e91f_th.jpeg" rel="gallery_cjpdenc1c000xiwv267x89ybn"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1543634444&di=bf68d68ed67652aa0d59eaa9822b7ae0&src=http://img.mp.itc.cn/upload/20161201/944e4cc452f8431fbbbc5d02c7f8e91f_th.jpeg" itemprop="contentUrl"/>
               </a>
@@ -761,7 +758,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yangcf.github.io/2018/11/27/ScrollView中嵌套ListView的动态高度问题/">
+    <link itemprop="mainEntityOfPage" href="https://yangcf.github.io/2018/11/28/解决Android安卓65k问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="饭饭君~">
@@ -780,7 +777,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/27/ScrollView中嵌套ListView的动态高度问题/" itemprop="url">ScrollView中嵌套ListView的动态高度问题</a></h1>
+                <a class="post-title-link" href="/2018/11/28/解决Android安卓65k问题/" itemprop="url">解决Android安卓65k问题</a></h1>
         
 
         <div class="post-meta">
@@ -792,8 +789,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-27T10:05:23+08:00">
-                2018-11-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-28T13:34:37+08:00">
+                2018-11-28
               </time>
             
 
@@ -833,8 +830,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/27/ScrollView中嵌套ListView的动态高度问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/27/ScrollView中嵌套ListView的动态高度问题/" itemprop="commentCount"></span>
+                <a href="/2018/11/28/解决Android安卓65k问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/28/解决Android安卓65k问题/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -842,7 +839,7 @@
 
           
           
-             <span id="/2018/11/27/ScrollView中嵌套ListView的动态高度问题/" class="leancloud_visitors" data-flag-title="ScrollView中嵌套ListView的动态高度问题">
+             <span id="/2018/11/28/解决Android安卓65k问题/" class="leancloud_visitors" data-flag-title="解决Android安卓65k问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -894,9 +891,9 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1543634373&di=fbfc437181ed7b2ee7c00081b62005d3&src=http://p0.ifengimg.com/pmop/2017/0905/3487C4361B7000F64EDA3CE742DCDE99964E2F6C_size92_w1000_h683.jpeg" rel="gallery_cjpat8a11000jc0v2pced7swq"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543644643405&di=1f7babb154f4d7c7ccee3c94bccef820&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F56cfb340669132f46dbf7a789b41eca1833dc81d.jpg" rel="gallery_cjpdenc690021iwv2sm7xdttu"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1543634373&di=fbfc437181ed7b2ee7c00081b62005d3&src=http://p0.ifengimg.com/pmop/2017/0905/3487C4361B7000F64EDA3CE742DCDE99964E2F6C_size92_w1000_h683.jpeg" itemprop="contentUrl"/>
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543644643405&di=1f7babb154f4d7c7ccee3c94bccef820&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F56cfb340669132f46dbf7a789b41eca1833dc81d.jpg" itemprop="contentUrl"/>
               </a>
             
           
@@ -910,14 +907,15 @@
         
           
           
-问题
-昨天写代码时突然遇到一个问题，当ListView处于ScrollView中时，如果动态的给ListView添加数据的话，并不会显示多行，仅显示一行。
 
-开始我以为是数据或者adapter的问题
+给公司的老项目做开发可能都会见到这个问题：
+
+
+出现这个问题的原因是由于在编译时，一个项目的class文件会被全部打包为一个classes.dex文件(玩过反编译的同学应该心有所感，哈哈)，它会为
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/11/27/ScrollView中嵌套ListView的动态高度问题/#more" rel="contents">
+            <a class="btn" href="/2018/11/28/解决Android安卓65k问题/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1016,7 +1014,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1124,7 +1122,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共13.8k字</span>
+  <span class="post-count">博客全站共14.7k字</span>
 </div>
 
         
