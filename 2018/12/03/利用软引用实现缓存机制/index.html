@@ -90,12 +90,12 @@
 <meta property="og:site_name" content="时间一直在变">
 <meta property="og:description" content="首先，我们需要对java对象的4种引用有一个大概的认识。  java对象的引用包括强引用，软引用，弱引用，虚引用  顾名思义，他们表示对象的引用强度依次递减。 他们有什么作用？最重要的目的就是方便gc进行回收。我们都知道，java的一大特点就是开发者不用关心内存的使用，jvm会帮助我们自动回收无用的内存空间(对象),而哪些对象需要回收就是通过引用来作为一种判断依据。 一、四种引用1.强引用通常我">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543828331358&di=1efc779c20c8a1a1226d5da789010789&imgtype=0&src=http%3A%2F%2Fpic29.photophoto.cn%2F20131021%2F0037037582708103_b.jpg">
-<meta property="og:updated_time" content="2018-12-04T01:39:22.222Z">
+<meta property="og:image" content="https://yangcf.github.io/2018/12/03/利用软引用实现缓存机制/log.jpg">
+<meta property="og:updated_time" content="2019-04-23T02:52:10.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用软引用实现缓存机制">
 <meta name="twitter:description" content="首先，我们需要对java对象的4种引用有一个大概的认识。  java对象的引用包括强引用，软引用，弱引用，虚引用  顾名思义，他们表示对象的引用强度依次递减。 他们有什么作用？最重要的目的就是方便gc进行回收。我们都知道，java的一大特点就是开发者不用关心内存的使用，jvm会帮助我们自动回收无用的内存空间(对象),而哪些对象需要回收就是通过引用来作为一种判断依据。 一、四种引用1.强引用通常我">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543828331358&di=1efc779c20c8a1a1226d5da789010789&imgtype=0&src=http%3A%2F%2Fpic29.photophoto.cn%2F20131021%2F0037037582708103_b.jpg">
+<meta name="twitter:image" content="https://yangcf.github.io/2018/12/03/利用软引用实现缓存机制/log.jpg">
 
 
 
@@ -461,22 +461,6 @@
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543828331358&di=1efc779c20c8a1a1226d5da789010789&imgtype=0&src=http%3A%2F%2Fpic29.photophoto.cn%2F20131021%2F0037037582708103_b.jpg" rel="gallery_cjpxo2be1001docv263w4x1pk"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543828331358&di=1efc779c20c8a1a1226d5da789010789&imgtype=0&src=http%3A%2F%2Fpic29.photophoto.cn%2F20131021%2F0037037582708103_b.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
 
       
         <hr>
@@ -528,7 +512,7 @@
   <p><span>本文标题:</span><a href="/2018/12/03/利用软引用实现缓存机制/">利用软引用实现缓存机制</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年12月03日 - 14:11</p>
-  <p><span>最后更新:</span>2018年12月04日 - 09:39</p>
+  <p><span>最后更新:</span>2019年04月23日 - 10:52</p>
   <p><span>原始链接:</span><a href="/2018/12/03/利用软引用实现缓存机制/" title="利用软引用实现缓存机制">https://yangcf.github.io/2018/12/03/利用软引用实现缓存机制/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangcf.github.io/2018/12/03/利用软引用实现缓存机制/"  aria-label="复制成功！"></i></span>
   </p>
@@ -614,8 +598,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/03/String源码解析/" rel="prev" title="String源码解析">
-                String源码解析 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/03/Object源码解析/" rel="prev" title="Object源码解析">
+                Object源码解析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -700,7 +684,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -797,7 +781,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -824,7 +808,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共15.3k字</span>
+  <span class="post-count">博客全站共15.7k字</span>
 </div>
 
         
@@ -1503,5 +1487,5 @@ document.body.oncopy = addLink;
    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
    <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

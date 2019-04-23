@@ -90,12 +90,12 @@
 <meta property="og:site_name" content="时间一直在变">
 <meta property="og:description" content="从今天起，正式开启jdk源码的学习，以前虽然也看过，但总是断断续续的没有系统的学习和坚持下来，现在下定决心要把这块骨头啃下来，哈哈。  java.long.Object是所有class的顶级父类，也是我们学习的源头。 首先我们来看一下Object的结构：  前两行就是静态代码块1234private static native void registerNatives();    static">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543827637468&di=948a3de25d9edb697b80359272787e36&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201604%2F06%2F20160406133453_BHmJk.jpeg">
-<meta property="og:updated_time" content="2018-12-05T05:07:28.458Z">
+<meta property="og:image" content="https://yangcf.github.io/2018/12/03/Object源码解析/object.jpg">
+<meta property="og:updated_time" content="2019-04-23T02:50:04.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Object源码解析">
 <meta name="twitter:description" content="从今天起，正式开启jdk源码的学习，以前虽然也看过，但总是断断续续的没有系统的学习和坚持下来，现在下定决心要把这块骨头啃下来，哈哈。  java.long.Object是所有class的顶级父类，也是我们学习的源头。 首先我们来看一下Object的结构：  前两行就是静态代码块1234private static native void registerNatives();    static">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543827637468&di=948a3de25d9edb697b80359272787e36&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201604%2F06%2F20160406133453_BHmJk.jpeg">
+<meta name="twitter:image" content="https://yangcf.github.io/2018/12/03/Object源码解析/object.jpg">
 
 
 
@@ -461,22 +461,6 @@
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543827637468&di=948a3de25d9edb697b80359272787e36&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201604%2F06%2F20160406133453_BHmJk.jpeg" rel="gallery_cjpxo2bd8000eocv256h01f0d"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543827637468&di=948a3de25d9edb697b80359272787e36&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201604%2F06%2F20160406133453_BHmJk.jpeg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
 
       
         <hr>
@@ -498,6 +482,7 @@
 <p><code>notify()</code>方法用于在多线程中唤醒等待的线程，<code>notifyAll()</code>的区别是唤醒所有正在等待当前对象的线程。<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="function"><span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="function"><span class="keyword">void</span> <span class="title">notifyAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p><code>wait()</code>方法用来暂时挂起当前线程，加入等待队列。这里要注意的是当<code>timeout==0</code>时，并不是等待0秒，而是一直等待，直到被唤醒。<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="function"><span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout, <span class="keyword">int</span> nanos)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timeout &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"timeout value is negative"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nanos &lt; <span class="number">0</span> || nanos &gt; <span class="number">999999</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(</span><br><span class="line">                                <span class="string">"nanosecond timeout value out of range"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nanos &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            timeout++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        wait(timeout);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="function"><span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout)</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="function"><span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        wait(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>最后一项是<code>finalize()</code>方法，这是一个回调函数，当gc即将回收当前对象时会调用这个方法，但这个时候并不会回收内存，在<code>下一次</code>回收时才会真正的释放内存空间。<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>下一节咱们学习<a href="">String</a>。</p>
 
       
     </div>
@@ -527,7 +512,7 @@
   <p><span>本文标题:</span><a href="/2018/12/03/Object源码解析/">Object源码解析</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
   <p><span>发布时间:</span>2018年12月03日 - 16:54</p>
-  <p><span>最后更新:</span>2018年12月05日 - 13:07</p>
+  <p><span>最后更新:</span>2019年04月23日 - 10:50</p>
   <p><span>原始链接:</span><a href="/2018/12/03/Object源码解析/" title="Object源码解析">https://yangcf.github.io/2018/12/03/Object源码解析/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangcf.github.io/2018/12/03/Object源码解析/"  aria-label="复制成功！"></i></span>
   </p>
@@ -603,8 +588,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/03/StringBuffer&StringBuilder源码解析/" rel="next" title="StringBuffer & StringBuilder源码解析">
-                <i class="fa fa-chevron-left"></i> StringBuffer & StringBuilder源码解析
+              <a href="/2018/12/03/利用软引用实现缓存机制/" rel="next" title="利用软引用实现缓存机制">
+                <i class="fa fa-chevron-left"></i> 利用软引用实现缓存机制
               </a>
             
           </div>
@@ -612,6 +597,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/03/String源码解析/" rel="prev" title="String源码解析">
+                String源码解析 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -686,7 +675,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -767,7 +756,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -794,7 +783,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共15.3k字</span>
+  <span class="post-count">博客全站共15.7k字</span>
 </div>
 
         
@@ -1473,5 +1462,5 @@ document.body.oncopy = addLink;
    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
    <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
