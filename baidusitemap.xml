@@ -3,6 +3,28 @@
 
     
   <url>
+    <loc>https://yangcf.github.io/2019/04/20/Maven%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2019-04-23T03:40:21.362Z</lastmod>
+    <data>
+        <display>
+        <title>Maven依赖管理</title>
+        <pubTime>2019-04-20T06:50:22.000Z</pubTime>
+        
+        <tag>小常识 </tag>
+         
+        <tag>maven </tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="https://yangcf.github.io/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yangcf.github.io/2018/12/03/%E5%88%A9%E7%94%A8%E8%BD%AF%E5%BC%95%E7%94%A8%E5%AE%9E%E7%8E%B0%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/</loc>
     <lastmod>2019-04-23T02:52:10.429Z</lastmod>
     <data>
@@ -290,11 +312,11 @@
         <title>JDK,JRE,JVM区别与联系</title>
         <pubTime>2018-11-29T13:56:28.000Z</pubTime>
         
+        <tag>JDK </tag>
+         
         <tag>JVM </tag>
          
         <tag>java学习 </tag>
-         
-        <tag>JDK </tag>
          
          
            
