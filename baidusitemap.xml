@@ -3,6 +3,26 @@
 
     
   <url>
+    <loc>https://yangcf.github.io/2019/04/23/springclould%E6%95%B4%E5%90%88thymeleaf%E7%9A%84%E5%9D%91/</loc>
+    <lastmod>2019-04-23T07:56:46.678Z</lastmod>
+    <data>
+        <display>
+        <title>springclould整合thymeleaf的坑</title>
+        <pubTime>2019-04-23T07:37:22.000Z</pubTime>
+        
+        <tag>java学习 </tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="https://yangcf.github.io/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yangcf.github.io/2019/04/20/Maven%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2019-04-23T03:40:21.362Z</lastmod>
     <data>
@@ -312,11 +332,11 @@
         <title>JDK,JRE,JVM区别与联系</title>
         <pubTime>2018-11-29T13:56:28.000Z</pubTime>
         
-        <tag>JDK </tag>
-         
         <tag>JVM </tag>
          
         <tag>java学习 </tag>
+         
+        <tag>JDK </tag>
          
          
            
