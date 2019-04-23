@@ -530,7 +530,7 @@ java.long.Object是所有class的顶级父类，
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yangcf.github.io/2018/12/03/String源码解析/">
+    <link itemprop="mainEntityOfPage" href="https://yangcf.github.io/2018/12/03/StringBuffer&StringBuilder源码解析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="饭饭君~">
@@ -549,7 +549,7 @@ java.long.Object是所有class的顶级父类，
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/03/String源码解析/" itemprop="url">String源码解析</a></h1>
+                <a class="post-title-link" href="/2018/12/03/StringBuffer&StringBuilder源码解析/" itemprop="url">StringBuffer & StringBuilder源码解析</a></h1>
         
 
         <div class="post-meta">
@@ -602,8 +602,8 @@ java.long.Object是所有class的顶级父类，
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/03/String源码解析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/03/String源码解析/" itemprop="commentCount"></span>
+                <a href="/2018/12/03/StringBuffer&StringBuilder源码解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/03/StringBuffer&StringBuilder源码解析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -611,7 +611,7 @@ java.long.Object是所有class的顶级父类，
 
           
           
-             <span id="/2018/12/03/String源码解析/" class="leancloud_visitors" data-flag-title="String源码解析">
+             <span id="/2018/12/03/StringBuffer&StringBuilder源码解析/" class="leancloud_visitors" data-flag-title="StringBuffer & StringBuilder源码解析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -639,7 +639,7 @@ java.long.Object是所有class的顶级父类，
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4分钟
+                  2分钟
                 </span>
               
             </div>
@@ -664,13 +664,11 @@ java.long.Object是所有class的顶级父类，
           
           
 
-接下来我们进行Sting的学习，这个类算是很常用的。
-
-String继承了三个接口：1public final class String implements java.io.Serializab
+现在我们继续来学习StringBuffer和StringBuilder，之所以把他们放在一起，是因为他们有很多共性，没有必要分开来学习。他们都属于String的衍生物,他们和String最大的区别
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/12/03/String源码解析/#more" rel="contents">
+            <a class="btn" href="/2018/12/03/StringBuffer&StringBuilder源码解析/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -769,7 +767,7 @@ String继承了三个接口：1public final class String implements java.io.Seri
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -791,7 +789,7 @@ String继承了三个接口：1public final class String implements java.io.Seri
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -877,7 +875,7 @@ String继承了三个接口：1public final class String implements java.io.Seri
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共16.3k字</span>
+  <span class="post-count">博客全站共16.4k字</span>
 </div>
 
         
