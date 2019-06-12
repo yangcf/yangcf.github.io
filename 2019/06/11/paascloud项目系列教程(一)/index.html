@@ -71,7 +71,7 @@
 
 
 
-  <meta name="keywords" content="ITEM项目," />
+  <meta name="keywords" content="paascloud," />
 
 
 
@@ -82,18 +82,18 @@
 
 
 
-<meta name="description" content="前言 登陆控制无疑是我们这个项目启动后遇到的第一个问题，所有的初始化操作都要在登陆时进行，目前需要的初始化操作只有数据下载这一项，如果后期要添加初始化操作，我建议还是和数据下载放在同一操作层。  逻辑目前的登陆逻辑还是比较简单，后期肯定还会进行修改，本文将会持续跟进。具体如下图所示（如果加载缓慢请点击这里）：   重要的一点已经在图中标识，从“对比数据版本”开始，两种情况（首次和非首次登陆）一定">
-<meta name="keywords" content="ITEM项目">
+<meta name="description" content="最近开始微服务的正式学习，网上找了一圈决定用开源项目passcloud作为学习参考，万分感谢~   这个系列教程的目的是完全梳理paascloud项目架构和功能，并不是从零开始学习微服务，所有内容均建立在阅读者已拥有微服务基础知识储备并具备基本开发能力。下面开始正式学习。  项目介绍123456789101112131415功能点：    模拟商城，完整的购物流程、后端运营平台对前端业务的支撑">
+<meta name="keywords" content="paascloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ITEM项目逻辑梳理之启动(一)">
-<meta property="og:url" content="https://yangcf.github.io/2018/03/10/ITEM项目逻辑梳理之启动(一)/index.html">
+<meta property="og:title" content="paascloud项目系列教程(一)">
+<meta property="og:url" content="https://yangcf.github.io/2019/06/11/paascloud项目系列教程(一)/index.html">
 <meta property="og:site_name" content="时间一直在变">
-<meta property="og:description" content="前言 登陆控制无疑是我们这个项目启动后遇到的第一个问题，所有的初始化操作都要在登陆时进行，目前需要的初始化操作只有数据下载这一项，如果后期要添加初始化操作，我建议还是和数据下载放在同一操作层。  逻辑目前的登陆逻辑还是比较简单，后期肯定还会进行修改，本文将会持续跟进。具体如下图所示（如果加载缓慢请点击这里）：   重要的一点已经在图中标识，从“对比数据版本”开始，两种情况（首次和非首次登陆）一定">
+<meta property="og:description" content="最近开始微服务的正式学习，网上找了一圈决定用开源项目passcloud作为学习参考，万分感谢~   这个系列教程的目的是完全梳理paascloud项目架构和功能，并不是从零开始学习微服务，所有内容均建立在阅读者已拥有微服务基础知识储备并具备基本开发能力。下面开始正式学习。  项目介绍123456789101112131415功能点：    模拟商城，完整的购物流程、后端运营平台对前端业务的支撑">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-23T02:49:24.686Z">
+<meta property="og:updated_time" content="2019-06-12T08:03:55.406Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ITEM项目逻辑梳理之启动(一)">
-<meta name="twitter:description" content="前言 登陆控制无疑是我们这个项目启动后遇到的第一个问题，所有的初始化操作都要在登陆时进行，目前需要的初始化操作只有数据下载这一项，如果后期要添加初始化操作，我建议还是和数据下载放在同一操作层。  逻辑目前的登陆逻辑还是比较简单，后期肯定还会进行修改，本文将会持续跟进。具体如下图所示（如果加载缓慢请点击这里）：   重要的一点已经在图中标识，从“对比数据版本”开始，两种情况（首次和非首次登陆）一定">
+<meta name="twitter:title" content="paascloud项目系列教程(一)">
+<meta name="twitter:description" content="最近开始微服务的正式学习，网上找了一圈决定用开源项目passcloud作为学习参考，万分感谢~   这个系列教程的目的是完全梳理paascloud项目架构和功能，并不是从零开始学习微服务，所有内容均建立在阅读者已拥有微服务基础知识储备并具备基本开发能力。下面开始正式学习。  项目介绍123456789101112131415功能点：    模拟商城，完整的购物流程、后端运营平台对前端业务的支撑">
 
 
 
@@ -123,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://yangcf.github.io/2018/03/10/ITEM项目逻辑梳理之启动(一)/"/>
+  <link rel="canonical" href="https://yangcf.github.io/2019/06/11/paascloud项目系列教程(一)/"/>
 
 
 
 
 
-  <title>ITEM项目逻辑梳理之启动(一) | 时间一直在变</title>
+  <title>paascloud项目系列教程(一) | 时间一直在变</title>
   
 
 
@@ -333,7 +333,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yangcf.github.io/2018/03/10/ITEM项目逻辑梳理之启动(一)/">
+    <link itemprop="mainEntityOfPage" href="https://yangcf.github.io/2019/06/11/paascloud项目系列教程(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="饭饭君~">
@@ -350,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ITEM项目逻辑梳理之启动(一)</h1>
+          <h1 class="post-title" itemprop="name headline">paascloud项目系列教程(一)</h1>
         
 
         <div class="post-meta">
@@ -362,8 +362,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T13:33:42+08:00">
-                2018-03-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-11T09:46:22+08:00">
+                2019-06-11
               </time>
             
 
@@ -385,8 +385,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ReactNative/" itemprop="url" rel="index">
-                    <span itemprop="name">ReactNative</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -403,8 +403,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/10/ITEM项目逻辑梳理之启动(一)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/03/10/ITEM项目逻辑梳理之启动(一)/" itemprop="commentCount"></span>
+                <a href="/2019/06/11/paascloud项目系列教程(一)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/11/paascloud项目系列教程(一)/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -412,7 +412,7 @@
 
           
           
-             <span id="/2018/03/10/ITEM项目逻辑梳理之启动(一)/" class="leancloud_visitors" data-flag-title="ITEM项目逻辑梳理之启动(一)">
+             <span id="/2019/06/11/paascloud项目系列教程(一)/" class="leancloud_visitors" data-flag-title="paascloud项目系列教程(一)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -440,7 +440,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1分钟
+                  6分钟
                 </span>
               
             </div>
@@ -462,14 +462,22 @@
 
       
         <hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>登陆控制无疑是我们这个项目启动后遇到的第一个问题，所有的初始化操作都要在登陆时进行，目前需要的初始化操作只有数据下载这一项，如果后期要添加初始化操作，我建议还是和数据下载放在同一操作层。</p>
+<blockquote>
+<p>最近开始微服务的正式学习，网上找了一圈决定用开源项目<a href="https://github.com/paascloud/paascloud-master" target="_blank" rel="noopener">passcloud</a>作为学习参考，万分感谢~</p>
 </blockquote>
-<h2 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h2><p>目前的登陆逻辑还是比较简单，后期肯定还会进行修改，本文将会持续跟进。<br>具体如下图所示（如果加载缓慢请点击<a href="http://yangchaofan.coding.me" target="_blank" rel="noopener">这里</a>）：</p>
-<iframe src="https://www.xmind.net/embed/f2PV" width="900px" height="540px"></iframe>
-
-<p>重要的一点已经在图中标识，从“对比数据版本”开始，两种情况（首次和非首次登陆）一定要复用处理逻辑，尽量简洁代码量。<br>最后下载失败时存的标识可以在进行数据相关操作时进行判断，如果存在下载失败状态，就立即提示用户先要更新本地数据。</p>
-<p>如果有问题欢迎指正。</p>
+<blockquote>
+<p>这个系列教程的目的是完全梳理paascloud项目架构和功能，并不是从零开始学习微服务，所有内容均建立在阅读者已拥有微服务基础知识储备并具备基本开发能力。下面开始正式学习。</p>
+</blockquote>
+<h1 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h1><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">功能点：</span><br><span class="line">    模拟商城，完整的购物流程、后端运营平台对前端业务的支撑，和对项目的运维，有各项的监控指标和运维指标。</span><br><span class="line">技术点：</span><br><span class="line">       核心技术为springcloud+vue两个全家桶实现，采取了取自开源用于开源的目标，所以能用开源绝不用收费框架，整体技术栈只有</span><br><span class="line">    阿里云短信服务是收费的，都是目前<span class="keyword">java前瞻性的框架，可以为中小企业解决微服务架构难题，可以帮助企业快速建站。由于服务</span></span><br><span class="line"><span class="keyword"> </span>   器成本较高，尽量降低开发成本的原则，本项目由<span class="number">10</span>个后端项目和<span class="number">3</span>个前端项目共同组成。真正实现了基于RBAC、<span class="keyword">jwt和oauth2的</span></span><br><span class="line"><span class="keyword"> </span>   无状态统一权限认证的解决方案，实现了异常和日志的统一管理，实现了MQ落地保证<span class="number">100</span>%到达的解决方案。</span><br><span class="line"></span><br><span class="line">true核心框架：springcloud Edgware全家桶</span><br><span class="line">true安全框架：Spring Security Spring <span class="keyword">Cloud </span>Oauth2</span><br><span class="line">true分布式任务调度：elastic-<span class="keyword">job</span></span><br><span class="line"><span class="keyword">	</span>持久层框架：MyBatis、通用Mapper4、Mybatis_PageHelper</span><br><span class="line">true数据库连接池：Alibaba Druid</span><br><span class="line">true日志管理：Logback	前端框架：Vue全家桶以及相关组件</span><br><span class="line">true三方服务： 邮件服务、阿里云短信服务、七牛云文件服务、钉钉机器人服务、高德地图API</span><br></pre></td></tr></table></figure>
+<h1 id="目录结构："><a href="#目录结构：" class="headerlink" title="目录结构："></a>目录结构：</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">├─paascloud-master<span class="comment">----------------------------父项目，公共依赖</span></span><br><span class="line">│  │</span><br><span class="line">│  ├─paascloud-eureka<span class="comment">--------------------------微服务注册中心</span></span><br><span class="line">│  │</span><br><span class="line">│  ├─paascloud-discovery<span class="comment">-----------------------微服务配置中心</span></span><br><span class="line">│  │</span><br><span class="line">│  ├─paascloud-monitor<span class="comment">-------------------------微服务监控中心</span></span><br><span class="line">│  │</span><br><span class="line">│  ├─paascloud-zipkin<span class="comment">--------------------------微服务日志采集中心</span></span><br><span class="line">│  │</span><br><span class="line">│  ├─paascloud-gateway<span class="comment">--------------------------微服务网关中心</span></span><br><span class="line">│  │</span><br><span class="line">│  ├─paascloud-provider</span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-provider-mdc<span class="comment">------------------数据服务中心</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-provider-omc<span class="comment">------------------订单服务中心</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-provider-opc<span class="comment">------------------对接服务中心</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-provider-tpc<span class="comment">------------------任务服务中心</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  └─paascloud-provider-uac<span class="comment">------------------用户服务中心</span></span><br><span class="line">│  │</span><br><span class="line">│  ├─paascloud-provider-api</span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-provider-mdc-api<span class="comment">------------------数据服务中心API</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-provider-omc-api<span class="comment">------------------订单服务中心API</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-provider-opc-api<span class="comment">------------------对接服务中心API</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-provider-tpc-api<span class="comment">------------------任务服务中心API</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-provider-sdk-api<span class="comment">------------------可靠消息服务API</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  └─paascloud-provider-uac-api<span class="comment">------------------用户服务中心API</span></span><br><span class="line">│  │</span><br><span class="line">│  ├─paascloud-common</span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-common-base<span class="comment">------------------公共POJO基础包</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-common-<span class="built_in">config</span><span class="comment">------------------公共配置包</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-common-core<span class="comment">------------------微服务核心依赖包</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-common-util<span class="comment">------------------公共工具包</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-common-zk<span class="comment">------------------zookeeper配置</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-security-app<span class="comment">------------------公共无状态安全认证</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-security-core<span class="comment">------------------安全服务核心包</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  └─paascloud-security-feign<span class="comment">------------------基于auth2的feign配置</span></span><br><span class="line">│  │</span><br><span class="line">│  ├─paascloud-generator</span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-generator-mdc<span class="comment">------------------数据服务中心Mybatis Generator</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-generator-omc<span class="comment">------------------数据服务中心Mybatis Generator</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-generator-opc<span class="comment">------------------数据服务中心Mybatis Generator</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  ├─paascloud-generator-tpc<span class="comment">------------------数据服务中心Mybatis Generator</span></span><br><span class="line">│  │  │</span><br><span class="line">│  │  └─paascloud-generator-uac<span class="comment">------------------数据服务中心Mybatis Generator</span></span><br></pre></td></tr></table></figure>
+<h1 id="paascloud-eureka-微服务注册中心"><a href="#paascloud-eureka-微服务注册中心" class="headerlink" title="paascloud-eureka 微服务注册中心"></a>paascloud-eureka 微服务注册中心</h1><p>我们先从简单的学起。</p>
+<p>pom:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--关键依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-eureka-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--安全相关，不需要也可以不引用--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--日志，需要编写对应的日志配置文件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.logstash.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logstash-logback-encoder<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>java：用注释<code>EnableEurekaServer</code>标识该类为服务注册中心<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@EnableEurekaServer</span></span><br><span class="line"><span class="variable">@SpringBootApplication</span></span><br><span class="line">public class PaasCloudEurekaApplication &#123;</span><br><span class="line"></span><br><span class="line">true<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * The entry point of application.</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * @param args the input arguments</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">true<span class="selector-tag">public</span> <span class="selector-tag">static</span> <span class="selector-tag">void</span> <span class="selector-tag">main</span>(String[] args) &#123;</span><br><span class="line">truetrue<span class="selector-tag">SpringApplication</span><span class="selector-class">.run</span>(PaasCloudEurekaApplication.class, args);</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到有两个主要的资源配置文件：bootstrap.yml、application.yml。<br>他们的主要区别为bootstrap会比application加载更早，所以bootstrap中往往进行一些与启动有关的、更加底层的参数配置（这些配置通常不容易改变）。<br>当然，你想混用也没问题。</p>
+<p>bootstrap.yml：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这一段配置的作用是为了在多网卡服务器上部署项目时指定地址</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    inetutils:</span></span><br><span class="line"><span class="attr">      ignoredInterfaces:</span> <span class="comment">#忽略网卡</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">docker0</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">veth.*</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">VM.*</span></span><br><span class="line"><span class="attr">      preferredNetworks:</span> <span class="comment">#指定IP地址段</span></span><br><span class="line"><span class="bullet">        -</span> <span class="number">192.168</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  server:</span></span><br><span class="line"><span class="attr">    enable-self-preservation:</span> <span class="literal">false</span> <span class="comment">#关闭eureka自我保护机制</span></span><br><span class="line"><span class="attr">  instance:</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">localhost</span> <span class="comment">#设置当前实例的主机名称</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    registerWithEureka:</span> <span class="literal">false</span> <span class="comment">#关闭服务注册（不将自身作为服务注册）</span></span><br><span class="line"><span class="attr">    fetchRegistry:</span> <span class="literal">false</span> <span class="comment">#关闭检索服务</span></span><br><span class="line"><span class="attr">    serviceUrl:</span>  <span class="comment">#设置服务注册中心默认地址</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka</span></span><br></pre></td></tr></table></figure></p>
+<p>application.yml<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#指定启动的端口</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8761</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  profiles:</span></span><br><span class="line"><span class="attr">    active:</span> <span class="string">dev</span> <span class="comment">#用来区分环境配置，这里好像没什么用了（没有其他配置文件）</span></span><br><span class="line"><span class="attr">  application:</span> <span class="comment">#指定应用名称</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">@pom.artifactId@</span></span><br><span class="line"></span><br><span class="line"><span class="attr">security:</span></span><br><span class="line"><span class="attr">  basic:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">true</span> <span class="comment">#开启基本鉴权</span></span><br><span class="line"><span class="attr">  user:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">root</span> <span class="comment">#默认用户名</span></span><br><span class="line"><span class="attr">    password:</span> <span class="string">root</span> <span class="comment">#默认密码</span></span><br></pre></td></tr></table></figure></p>
+<p>logback-spring.xml 日志配置文件<br><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  <span class="comment">&lt;!-- 此xml在spring-boot-1.5.3.RELEASE.jar里 --&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">include</span> <span class="attr">resource</span>=<span class="string">"org/springframework/boot/logging/logback/defaults.xml"</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">include</span> <span class="attr">resource</span>=<span class="string">"org/springframework/boot/logging/logback/console-appender.xml"</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="comment">&lt;!-- 开启后可以通过jmx动态控制日志级别(springboot Admin的功能) --&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="comment">&lt;!--&lt;jmxConfigurator/&gt;--&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">springProperty</span> <span class="attr">scope</span>=<span class="string">"context"</span> <span class="attr">name</span>=<span class="string">"springAppName"</span> <span class="attr">source</span>=<span class="string">"spring.application.name"</span>/&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"LOG_PATH"</span> <span class="attr">value</span>=<span class="string">"/data/logs/paascloud/$</span></span></span><span class="template-variable">&#123;springAppName&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>/&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"LOG_FILE"</span> <span class="attr">value</span>=<span class="string">"$</span></span></span><span class="template-variable">&#123;springAppName&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>/&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"FILE"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">File</span>&gt;</span>$</span><span class="template-variable">&#123;LOG_PATH&#125;</span><span class="xml">/$</span><span class="template-variable">&#123;LOG_FILE&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">File</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%date [%level] [%thread] %logger</span><span class="template-variable">&#123;60&#125;</span><span class="xml"> [%file : %line] %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="comment">&lt;!-- 添加.gz 历史日志会启用压缩 大大缩小日志文件所占空间 --&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$</span><span class="template-variable">&#123;LOG_PATH&#125;</span><span class="xml">daily/$</span><span class="template-variable">&#123;LOG_FILE&#125;</span><span class="xml">.%d</span><span class="template-variable">&#123;yyyy-MM-dd&#125;</span><span class="xml">.gz<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>30<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span><span class="comment">&lt;!--  保留30天日志 --&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"INFO"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"CONSOLE"</span>/&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"FILE"</span>/&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>有以上这些东西，eureka就可以运行起来了，通过网址<code>http://${eureka.instance.hostname}:${server.port}/eureka</code>可以访问到管理页面，用刚才设置的用户名和密码登录即可。<br>本节到此结束，<a href="">下一节</a>我们来分析paascloud的配置中心<code>discovery</code>，感谢阅读！</p>
 
       
     </div>
@@ -496,12 +504,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2018/03/10/ITEM项目逻辑梳理之启动(一)/">ITEM项目逻辑梳理之启动(一)</a></p>
+  <p><span>本文标题:</span><a href="/2019/06/11/paascloud项目系列教程(一)/">paascloud项目系列教程(一)</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 饭饭君~ 的个人博客">饭饭君~</a></p>
-  <p><span>发布时间:</span>2018年03月10日 - 13:33</p>
-  <p><span>最后更新:</span>2019年04月23日 - 10:49</p>
-  <p><span>原始链接:</span><a href="/2018/03/10/ITEM项目逻辑梳理之启动(一)/" title="ITEM项目逻辑梳理之启动(一)">https://yangcf.github.io/2018/03/10/ITEM项目逻辑梳理之启动(一)/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangcf.github.io/2018/03/10/ITEM项目逻辑梳理之启动(一)/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年06月11日 - 09:46</p>
+  <p><span>最后更新:</span>2019年06月12日 - 16:03</p>
+  <p><span>原始链接:</span><a href="/2019/06/11/paascloud项目系列教程(一)/" title="paascloud项目系列教程(一)">https://yangcf.github.io/2019/06/11/paascloud项目系列教程(一)/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yangcf.github.io/2019/06/11/paascloud项目系列教程(一)/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -562,7 +570,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ITEM项目/" rel="tag"><i class="fa fa-tag"></i> ITEM项目</a>
+            <a href="/tags/paascloud/" rel="tag"><i class="fa fa-tag"></i> paascloud</a>
           
         </div>
       
@@ -575,8 +583,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/07/RN常用组件之SQLite/" rel="next" title="RN常用组件之SQLite">
-                <i class="fa fa-chevron-left"></i> RN常用组件之SQLite
+              <a href="/2019/06/11/paascloud项目系列教程(二)/" rel="next" title="paascloud项目系列教程(二)">
+                <i class="fa fa-chevron-left"></i> paascloud项目系列教程(二)
               </a>
             
           </div>
@@ -584,10 +592,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/30/共享变量可见性实现原理/" rel="prev" title="共享变量可见性实现原理">
-                共享变量可见性实现原理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -748,7 +752,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑"><span class="nav-number">2.</span> <span class="nav-text">逻辑</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#项目介绍"><span class="nav-number">1.</span> <span class="nav-text">项目介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目录结构："><span class="nav-number">2.</span> <span class="nav-text">目录结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#paascloud-eureka-微服务注册中心"><span class="nav-number">3.</span> <span class="nav-text">paascloud-eureka 微服务注册中心</span></a></li></ol></div>
             
 
           </div>
